@@ -11,22 +11,22 @@ const courses = [
 
 const TrendingCourses = () => {
     return (
-        <section className="bg-white py-4">
+        <section className="bg-white dark:bg-gray-900 py-4 transition-colors duration-300">
             <div className="max-w-6xl mx-auto px-4">
                 {/* Lime Green Container */}
-                <div className="bg-[#bef264] rounded-[2rem] p-8 md:p-10 relative">
+                <div className="bg-[#bef264] dark:bg-[#a3e635]/20 rounded-[2rem] p-8 md:p-10 relative transition-colors duration-300">
 
                     <div className="flex justify-between items-end mb-8">
-                        <h2 className="text-2xl md:text-3xl font-bold text-black text-center w-full">
+                        <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white text-center w-full transition-colors duration-300">
                             Our Trending Course
                         </h2>
-                        <span className="absolute top-8 right-8 text-xs font-bold underline cursor-pointer hover:text-white transition-colors">explore</span>
+                        <span className="absolute top-8 right-8 text-xs font-bold text-gray-800 dark:text-gray-300 underline cursor-pointer hover:text-white dark:hover:text-[#bef264] transition-colors duration-300">explore</span>
                     </div>
 
                     {/* Slots Grid */}
                     <div className="flex flex-wrap justify-center gap-6">
                         {courses.map((course) => (
-                            <div key={course.id} className="bg-white rounded-xl w-40 h-48 md:w-44 md:h-52 shadow-sm border-2 border-transparent hover:border-black/10 transition-all cursor-pointer flex flex-col overflow-hidden group relative">
+                            <div key={course.id} className="bg-white dark:bg-gray-800 rounded-xl w-40 h-48 md:w-44 md:h-52 shadow-sm border-2 border-transparent dark:border-gray-700 hover:border-black/10 dark:hover:border-[#bef264]/50 transition-all cursor-pointer flex flex-col overflow-hidden group relative">
 
                                 {/* Image Area */}
                                 <div className="h-3/5 w-full bg-gray-100 relative overflow-hidden">
@@ -41,8 +41,8 @@ const TrendingCourses = () => {
                                 </div>
 
                                 {/* Content Area */}
-                                <div className="p-3 flex flex-col flex-grow justify-between">
-                                    <h3 className="text-sm font-bold text-gray-900 leading-tight line-clamp-2 group-hover:text-brand-dark transition-colors">
+                                <div className="p-3 flex flex-col flex-grow justify-between bg-white dark:bg-gray-800 transition-colors duration-300">
+                                    <h3 className="text-sm font-bold text-gray-900 dark:text-white leading-tight line-clamp-2 group-hover:text-brand-dark dark:group-hover:text-[#bef264] transition-colors duration-300">
                                         {course.title}
                                     </h3>
 

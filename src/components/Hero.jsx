@@ -204,13 +204,13 @@ const Hero = () => {
             </div>
 
             {/* Headline Section */}
-            <div className="bg-white py-16 md:py-24 text-center px-4 relative">
+            <div className="bg-white dark:bg-gray-900 py-16 md:py-24 text-center px-4 relative transition-colors duration-300">
                 {/* Visual overlap connector */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-xl overflow-hidden p-2">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-xl overflow-hidden p-2 transition-colors duration-300">
                     <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Logo Icon" className="w-full h-full object-contain rounded-full" />
                 </div>
 
-                <div className="inline-flex items-center gap-2 bg-[#F3FCE3] px-6 py-2.5 rounded-full mb-8 shadow-sm border border-[#d9f99d] transform hover:-translate-y-1 transition-transform cursor-pointer mt-8">
+                <div className="inline-flex items-center gap-2 bg-[#F3FCE3] dark:bg-[#a3e635]/10 px-6 py-2.5 rounded-full mb-8 shadow-sm border border-[#d9f99d] dark:border-[#a3e635]/30 transform hover:-translate-y-1 transition-all duration-300 cursor-pointer mt-8">
                     <span className="relative flex h-3 w-3">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#bef264] opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-3 w-3 bg-[#65a30d]"></span>
@@ -220,20 +220,20 @@ const Hero = () => {
                     </h2>
                 </div>
 
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 uppercase tracking-tighter leading-[1.1] max-w-5xl mx-auto">
-                    Pahle <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-[#84cc16]">Vedifai</span> Karo <br className="hidden md:block" /> Fir Padhai Karo
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white uppercase tracking-tighter leading-[1.1] max-w-5xl mx-auto transition-colors duration-300">
+                    Pahle <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-[#84cc16] dark:from-[#bef264] dark:to-[#4ade80]">Vedifai</span> Karo <br className="hidden md:block" /> Fir Padhai Karo
                 </h1>
 
-                <p className="mt-6 text-gray-500 max-w-2xl mx-auto text-lg md:text-xl font-medium">
+                <p className="mt-6 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-medium transition-colors duration-300">
                     The smart way to discover, evaluate, and connect with top educators in your area. Stop guessing, start verifying.
                 </p>
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button className="flex items-center justify-center gap-2 bg-[#022c22] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-default transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1 w-full sm:w-auto">
+                    <button className="flex items-center justify-center gap-2 bg-[#022c22] dark:bg-[#a3e635] text-white dark:text-[#064e3b] px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-default dark:hover:bg-[#bef264] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 w-full sm:w-auto">
                         Find Tutors Now <ArrowRight size={20} />
                     </button>
-                    <button className="flex items-center justify-center gap-2 bg-white text-gray-800 border-2 border-gray-200 px-8 py-4 rounded-full font-bold text-lg hover:border-[#bef264] hover:bg-[#f7fee7] transition-all w-full sm:w-auto">
-                        <Play size={20} className="text-[#65a30d]" fill="currentColor" /> See How It Works
+                    <button className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-2 border-gray-200 dark:border-gray-700 px-8 py-4 rounded-full font-bold text-lg hover:border-[#bef264] dark:hover:border-[#bef264] hover:bg-[#f7fee7] dark:hover:bg-gray-700 transition-all duration-300 w-full sm:w-auto">
+                        <Play size={20} className="text-[#65a30d] dark:text-[#bef264]" fill="currentColor" /> See How It Works
                     </button>
                 </div>
             </div>

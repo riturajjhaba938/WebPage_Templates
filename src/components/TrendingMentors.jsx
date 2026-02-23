@@ -46,10 +46,10 @@ const mentors = [
 
 const TrendingMentors = () => {
     return (
-        <section className="bg-white py-4 mb-4">
+        <section className="bg-white dark:bg-gray-900 py-4 mb-4 transition-colors duration-300">
             <div className="max-w-6xl mx-auto px-4">
                 {/* Dark Green Container */}
-                <div className="bg-[#022c22] rounded-[2rem] p-8 relative text-white">
+                <div className="bg-[#022c22] dark:bg-gray-800 rounded-[2rem] p-8 relative text-white border border-transparent dark:border-gray-700 transition-colors duration-300">
 
                     <div className="flex justify-between items-end mb-8">
                         <h2 className="text-2xl md:text-3xl font-bold text-white text-center w-full">
@@ -65,29 +65,29 @@ const TrendingMentors = () => {
                                 <div className="relative w-full h-full transition-all duration-500 transform style-preserve-3d group-hover:rotate-y-180">
 
                                     {/* Front Side */}
-                                    <div className="absolute inset-0 bg-white rounded-xl shadow-lg flex flex-col items-center p-3 backface-hidden">
-                                        <div className="w-20 h-20 rounded-full mb-3 border-2 border-brand-light overflow-hidden p-0.5">
+                                    <div className="absolute inset-0 bg-white dark:bg-gray-900 rounded-xl shadow-lg flex flex-col items-center p-3 backface-hidden border border-transparent dark:border-gray-700 transition-colors duration-300">
+                                        <div className="w-20 h-20 rounded-full mb-3 border-2 border-brand-light dark:border-gray-700 overflow-hidden p-0.5 transition-colors duration-300">
                                             <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover rounded-full" />
                                         </div>
-                                        <h3 className="text-gray-900 font-bold text-xs text-center leading-tight mb-1">{mentor.name}</h3>
-                                        <p className="text-brand-accent text-[10px] font-semibold text-center">{mentor.role}</p>
-                                        <p className="text-gray-500 text-[9px] text-center mt-auto font-medium">@ {mentor.company}</p>
+                                        <h3 className="text-gray-900 dark:text-white font-bold text-xs text-center leading-tight mb-1 transition-colors duration-300">{mentor.name}</h3>
+                                        <p className="text-brand-accent dark:text-[#a3e635] text-[10px] font-semibold text-center transition-colors duration-300">{mentor.role}</p>
+                                        <p className="text-gray-500 dark:text-gray-400 text-[9px] text-center mt-auto font-medium transition-colors duration-300">@ {mentor.company}</p>
                                     </div>
 
                                     {/* Back Side (Hover Info) */}
-                                    <div className="absolute inset-0 bg-brand-lime rounded-xl shadow-xl flex flex-col items-center justify-center p-3 text-center backface-hidden rotate-y-180">
-                                        <p className="text-[#022c22] text-[10px] font-bold mb-3 leading-snug line-clamp-3">
+                                    <div className="absolute inset-0 bg-brand-lime dark:bg-[#064e3b] rounded-xl shadow-xl flex flex-col items-center justify-center p-3 text-center backface-hidden rotate-y-180 transition-colors duration-300">
+                                        <p className="text-[#022c22] dark:text-white text-[10px] font-bold mb-3 leading-snug line-clamp-3 transition-colors duration-300">
                                             "{mentor.bio}"
                                         </p>
                                         <div className="flex space-x-2 mb-2">
-                                            <div className="p-1 bg-[#022c22]/10 rounded-full hover:bg-[#022c22] hover:text-white transition-colors">
+                                            <div className="p-1 bg-[#022c22]/10 dark:bg-black/20 text-[#022c22] dark:text-white rounded-full hover:bg-[#022c22] dark:hover:bg-[#a3e635] hover:text-white dark:hover:text-gray-900 transition-colors duration-300">
                                                 <Linkedin size={12} />
                                             </div>
-                                            <div className="p-1 bg-[#022c22]/10 rounded-full hover:bg-[#022c22] hover:text-white transition-colors">
+                                            <div className="p-1 bg-[#022c22]/10 dark:bg-black/20 text-[#022c22] dark:text-white rounded-full hover:bg-[#022c22] dark:hover:bg-[#a3e635] hover:text-white dark:hover:text-gray-900 transition-colors duration-300">
                                                 <Twitter size={12} />
                                             </div>
                                         </div>
-                                        <button className="bg-[#022c22] text-white text-[9px] font-bold px-3 py-1 rounded-full hover:bg-black transition-colors">
+                                        <button className="bg-[#022c22] dark:bg-[#bef264] text-white dark:text-[#064e3b] text-[9px] font-bold px-3 py-1 rounded-full hover:bg-black dark:hover:bg-white transition-colors duration-300 mt-2">
                                             Profile
                                         </button>
                                     </div>
