@@ -11,7 +11,7 @@ const Navbar = () => {
 
                     {/* Logo with New Image */}
                     <div className="flex items-center gap-2">
-                        <img src="/src/assets/vedifai-logo.png" alt="Vedifai Logo" className="h-[50px] w-auto object-contain" />
+                        <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Logo" className="h-[50px] w-auto object-contain rounded-lg" />
                     </div>
 
                     {/* Desktop Menu */}

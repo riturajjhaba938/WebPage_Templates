@@ -207,7 +207,7 @@ const Hero = () => {
             <div className="bg-white py-16 md:py-24 text-center px-4 relative">
                 {/* Visual overlap connector */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-xl overflow-hidden p-2">
-                    <img src="/src/assets/vedifai-logo.png" alt="Vedifai Logo Icon" className="w-full h-full object-contain" />
+                    <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Logo Icon" className="w-full h-full object-contain rounded-full" />
                 </div>
 
                 <div className="inline-flex items-center gap-2 bg-[#F3FCE3] px-6 py-2.5 rounded-full mb-8 shadow-sm border border-[#d9f99d] transform hover:-translate-y-1 transition-transform cursor-pointer mt-8">
