@@ -194,8 +194,8 @@ const Hero = () => {
                                 className="group relative py-2 px-1 focus:outline-none"
                             >
                                 <div className={`h-1.5 rounded-full transition-all duration-500 ease-out ${currentSlide === idx
-                                        ? `w-16 ${heroSlides[currentSlide].glowColor} opacity-90 shadow-[0_0_15px_rgba(255,255,255,0.2)]`
-                                        : 'w-6 bg-gray-600 group-hover:bg-gray-400 group-hover:w-10'
+                                    ? `w-16 ${heroSlides[currentSlide].glowColor} opacity-90 shadow-[0_0_15px_rgba(255,255,255,0.2)]`
+                                    : 'w-6 bg-gray-600 group-hover:bg-gray-400 group-hover:w-10'
                                     }`}></div>
                             </button>
                         ))}
@@ -206,10 +206,8 @@ const Hero = () => {
             {/* Headline Section */}
             <div className="bg-white py-16 md:py-24 text-center px-4 relative">
                 {/* Visual overlap connector */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-xl">
-                    <div className="w-16 h-16 bg-brand-lime rounded-full flex items-center justify-center text-white font-bold text-xl">
-                        VF
-                    </div>
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-xl overflow-hidden p-2">
+                    <img src="/src/assets/vedifai-logo.png" alt="Vedifai Logo Icon" className="w-full h-full object-contain" />
                 </div>
 
                 <div className="inline-flex items-center gap-2 bg-[#F3FCE3] px-6 py-2.5 rounded-full mb-8 shadow-sm border border-[#d9f99d] transform hover:-translate-y-1 transition-transform cursor-pointer mt-8">

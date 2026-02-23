@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X, User, Bell } from 'lucide-react';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -9,14 +9,9 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
 
-                    {/* Logo with Green Monstera/Leaf Icon placeholder */}
+                    {/* Logo with New Image */}
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-brand-lime rounded-lg flex items-center justify-center text-brand-dark-green font-bold text-xs">
-                            VF
-                        </div>
-                        <a href="#" className="text-xl font-extrabold tracking-tighter text-gray-900">
-                            VEDIFAI
-                        </a>
+                        <img src="/src/assets/vedifai-logo.png" alt="Vedifai Logo" className="h-[50px] w-auto object-contain" />
                     </div>
 
                     {/* Desktop Menu */}
@@ -27,8 +22,15 @@ const Navbar = () => {
                             <a href="#" className="px-4 py-1.5 rounded-md hover:bg-white/50 text-[#064e3b] font-bold text-xs transition-colors">SUPPORT</a>
                         </div>
 
+                        {/* Notifications Icon */}
+                        <button className="ml-4 p-2 rounded-full relative bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-brand-accent transition-colors">
+                            <Bell size={20} />
+                            {/* Notification Badge */}
+                            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white"></span>
+                        </button>
+
                         {/* User Icon */}
-                        <button className="ml-4 p-2 rounded-full bg-[#bef264] text-[#064e3b] hover:bg-[#a3e635] transition-colors">
+                        <button className="ml-2 p-2 rounded-full bg-[#bef264] text-[#064e3b] hover:bg-[#a3e635] transition-colors">
                             <User size={20} />
                         </button>
                     </div>
