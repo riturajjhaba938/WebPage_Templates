@@ -38,6 +38,14 @@ function App() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  const navigateTo = (page, ids = []) => {
+    setCurrentPage(page);
+    if (page === 'comparison' && ids.length > 0) {
+      setCompareIds(ids);
+    }
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 flex flex-col font-sans text-gray-900 dark:text-gray-100">
       <Navbar theme={theme} toggleTheme={toggleTheme} onHomeClick={() => navigateTo('home')} />
