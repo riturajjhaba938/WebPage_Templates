@@ -93,7 +93,13 @@ const CourseDiscoveryPopup = ({ isOpen, onClose }) => {
                             </div>
                             <div className="flex items-center gap-4">
                                 <button onClick={clearAllFilters} className="text-xs text-brand-lime hover:underline hidden sm:block">Clear all</button>
-                                <button className="bg-[#bef264] text-[#022c22] px-4 py-2 rounded-full text-xs font-bold hover:bg-[#a3e635] transition-colors shadow-lg">
+                                <button
+                                    onClick={() => {
+                                        onClose();
+                                        if (onCompareNow) onCompareNow();
+                                    }}
+                                    className="bg-[#bef264] text-[#022c22] px-4 py-2 rounded-full text-xs font-bold hover:bg-[#a3e635] transition-colors shadow-lg"
+                                >
                                     Compare Now <span className="ml-1">→</span>
                                 </button>
                                 <button onClick={onClose} className="p-1 hover:bg-white/10 rounded-full cursor-pointer ml-2 transition-colors">

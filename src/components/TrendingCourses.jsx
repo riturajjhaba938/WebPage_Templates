@@ -6,7 +6,7 @@ import platformData from '../data/platformData.json';
 
 const courses = platformData.courses.filter(c => c.trending);
 
-const TrendingCourses = () => {
+const TrendingCourses = ({ onCompare }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     return (
@@ -65,7 +65,7 @@ const TrendingCourses = () => {
 
                 </div>
             </div>
-            <CourseDiscoveryPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
+            <CourseDiscoveryPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onCompareNow={onCompare} />
         </section >
     );
 };
