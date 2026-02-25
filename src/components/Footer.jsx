@@ -9,7 +9,10 @@ const Footer = () => {
 
                     {/* Brand Column */}
                     <div className="space-y-4">
-                        <h3 className="text-2xl font-bold tracking-tighter text-brand">VEDIFAI</h3>
+                        <div className="flex items-center gap-2">
+                            <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Logo" className="h-[40px] w-auto object-contain rounded-lg" />
+                            <h3 className="text-2xl font-bold tracking-tighter text-brand">VEDIFAI</h3>
+                        </div>
                         <p className="text-gray-400 text-sm leading-relaxed">
                             Empowering students and professionals to achieve their career goals through world-class education and mentorship.
                         </p>

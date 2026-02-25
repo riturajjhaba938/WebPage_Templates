@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --color-brand-light: #f3f4f6;
   --color-brand-default: #10b981;
@@ -15,7 +17,7 @@
 
 @layer base {
   body {
-    @apply font-sans text-gray-800 bg-white;
+    @apply font-sans text-gray-800 bg-white dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300;
   }
 
   h1,
@@ -24,6 +26,6 @@
   h4,
   h5,
   h6 {
-    @apply font-bold text-gray-900;
+    @apply font-bold text-gray-900 dark:text-white transition-colors duration-300;
   }
 }

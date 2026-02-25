@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BookOpen, Star, ArrowRight } from 'lucide-react';
+import CourseDiscoveryPopup from './CourseDiscoveryPopup';
 
-const courses = [
-    { id: 1, title: 'Introduction to React.js', price: '₹499', image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=300&h=200' },
-    { id: 2, title: 'Python for Data Science', price: '₹899', image: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&q=80&w=300&h=200' },
-    { id: 3, title: 'UI/UX Design Fundamentals', price: '₹699', image: 'https://images.unsplash.com/photo-1586717791821-3f44a5638d48?auto=format&fit=crop&q=80&w=300&h=200' },
-    { id: 4, title: 'Digital Marketing 101', price: '₹399', image: 'https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&q=80&w=300&h=200' },
-    { id: 5, title: 'Mastering TypeScript', price: '₹599', image: 'https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&q=80&w=300&h=200' },
-];
+import platformData from '../data/platformData.json';
+
+const courses = platformData.courses.filter(c => c.trending);
 
 const TrendingCourses = () => {
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
     return (
         <section className="bg-white dark:bg-gray-900 py-4 transition-colors duration-300">
             <div className="max-w-6xl mx-auto px-4">
                 {/* Lime Green Container */}
                 <div className="bg-[#bef264] dark:bg-[#a3e635]/20 rounded-[2rem] p-8 md:p-10 relative transition-colors duration-300">
-
                     <div className="flex justify-between items-end mb-8">
                         <h2 className="text-2xl md:text-3xl font-bold text-black dark:text-white text-center w-full transition-colors duration-300">
                             Our Trending Course
                         </h2>
-                        <span className="absolute top-8 right-8 text-xs font-bold text-gray-800 dark:text-gray-300 underline cursor-pointer hover:text-white dark:hover:text-[#bef264] transition-colors duration-300">explore</span>
+                        <span
+                            onClick={() => setIsPopupOpen(true)}
+                            className="absolute top-8 right-8 text-xs font-bold text-gray-800 dark:text-gray-300 underline cursor-pointer hover:text-white dark:hover:text-[#bef264] transition-colors duration-300"
+                        >
+                            explore
+                        </span>
                     </div>
 
                     {/* Slots Grid */}
@@ -62,7 +65,8 @@ const TrendingCourses = () => {
 
                 </div>
             </div>
-        </section>
+            <CourseDiscoveryPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
+        </section >
     );
 };
 

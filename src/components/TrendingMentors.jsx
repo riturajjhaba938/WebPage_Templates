@@ -1,48 +1,9 @@
 import React from 'react';
 import { Linkedin, Twitter, Globe, Github } from 'lucide-react';
 
-const mentors = [
-    {
-        id: 1,
-        name: 'Dr. Anjali Mehta',
-        role: 'AI Researcher',
-        company: 'Google DeepMind',
-        bio: 'Pioneering research in generative models.',
-        image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150'
-    },
-    {
-        id: 2,
-        name: 'Vikram Singh',
-        role: 'Sr. Backend Eng.',
-        company: 'Amazon',
-        bio: 'Architecting scalable cloud solutions.',
-        image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150'
-    },
-    {
-        id: 3,
-        name: 'Kavita Patel',
-        role: 'Product Lead',
-        company: 'Cred',
-        bio: 'Building fintech products for the next billion.',
-        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150&h=150'
-    },
-    {
-        id: 4,
-        name: 'Arjun Red',
-        role: 'Tech Lead',
-        company: 'Zomato',
-        bio: 'Full stack wizard obsessed with performance.',
-        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150'
-    },
-    {
-        id: 5,
-        name: 'Sneha Gupta',
-        role: 'Data Scientist',
-        company: 'Microsoft',
-        bio: 'Turning raw data into actionable insights.',
-        image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150'
-    },
-];
+import platformData from '../data/platformData.json';
+
+const mentors = platformData.mentors.filter(m => m.trending);
 
 const TrendingMentors = () => {
     return (
@@ -55,7 +16,6 @@ const TrendingMentors = () => {
                         <h2 className="text-2xl md:text-3xl font-bold text-white text-center w-full">
                             Our Trending Mentor/SME
                         </h2>
-                        <span className="absolute top-8 right-8 text-xs font-bold underline cursor-pointer hover:text-brand-lime transition-colors">explore</span>
                     </div>
 
                     {/* Slots Grid */}

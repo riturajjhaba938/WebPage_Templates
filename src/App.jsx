@@ -6,6 +6,7 @@ import CustomContentSection from './components/CustomContentSection';
 import TrendingCourses from './components/TrendingCourses';
 import TrendingMentors from './components/TrendingMentors';
 import Footer from './components/Footer';
+import ScrollMascot from './components/ScrollMascot';
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -37,6 +38,8 @@ function App() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 flex flex-col font-sans text-gray-900 dark:text-gray-100">
       <Navbar theme={theme} toggleTheme={toggleTheme} />
+
+      <ScrollMascot />
 
       <main className="flex-grow">
         <Hero />
