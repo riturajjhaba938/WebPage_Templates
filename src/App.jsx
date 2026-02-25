@@ -7,8 +7,11 @@ import TrendingCourses from './components/TrendingCourses';
 import TrendingMentors from './components/TrendingMentors';
 import Footer from './components/Footer';
 import ScrollMascot from './components/ScrollMascot';
+import CourseComparison from './components/CourseComparison';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+  const [compareIds, setCompareIds] = useState([]); // Store selected course IDs
   const [theme, setTheme] = useState(() => {
     // Check local storage or system preference on initial load
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -37,24 +40,30 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 flex flex-col font-sans text-gray-900 dark:text-gray-100">
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar theme={theme} toggleTheme={toggleTheme} onHomeClick={() => navigateTo('home')} />
 
-      <ScrollMascot />
+      {currentPage === 'home' && <ScrollMascot />}
 
       <main className="flex-grow">
-        <Hero />
+        {currentPage === 'home' ? (
+          <>
+            <Hero />
 
-        {/* Compact Stacking */}
-        <div className="flex flex-col relative z-20">
-          <TrendingCourses />
-          <TrendingMentors />
+            {/* Compact Stacking */}
+            <div className="flex flex-col relative z-20">
+              <TrendingCourses onCompare={(ids) => navigateTo('comparison', ids)} />
+              <TrendingMentors />
 
-          <OurServices />
+              <OurServices />
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-            <CustomContentSection />
-          </div>
-        </div>
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                <CustomContentSection />
+              </div>
+            </div>
+          </>
+        ) : (
+          <CourseComparison courseIds={compareIds} onBack={() => navigateTo('home')} />
+        )}
       </main>
 
       <Footer />

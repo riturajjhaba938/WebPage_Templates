@@ -5,7 +5,7 @@ import platformData from '../data/platformData.json';
 
 const allSubjects = [...new Set(platformData.courses.map(c => c.subject))];
 
-const CourseDiscoveryPopup = ({ isOpen, onClose }) => {
+const CourseDiscoveryPopup = ({ isOpen, onClose, onCompareNow }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedSubjects, setSelectedSubjects] = useState(allSubjects);
     const [maxPrice, setMaxPrice] = useState(50000);
@@ -13,6 +13,9 @@ const CourseDiscoveryPopup = ({ isOpen, onClose }) => {
     const [selectedLevel, setSelectedLevel] = useState('All');
     const [selectedFormat, setSelectedFormat] = useState('All');
     const [sortBy, setSortBy] = useState('Most Trending');
+
+    // New State for comparison
+    const [selectedForCompare, setSelectedForCompare] = useState([]);
 
     // Filter Logic
     const filteredCourses = useMemo(() => {
@@ -62,6 +65,20 @@ const CourseDiscoveryPopup = ({ isOpen, onClose }) => {
         setSortBy('Most Trending');
     };
 
+    const handleToggleCompare = (courseId) => {
+        setSelectedForCompare(prev => {
+            if (prev.includes(courseId)) {
+                return prev.filter(id => id !== courseId);
+            }
+            if (prev.length >= 3) {
+                // Maximum 3 courses can be compared at a time
+                alert("You can only compare up to 3 courses at a time.");
+                return prev;
+            }
+            return [...prev, courseId];
+        });
+    };
+
     return (
         <AnimatePresence>
             {isOpen && (
@@ -86,19 +103,36 @@ const CourseDiscoveryPopup = ({ isOpen, onClose }) => {
                         {/* Header Sub-bar */}
                         <div className="bg-[#022c22] text-white px-6 py-4 flex items-center justify-between">
                             <div className="flex items-center gap-3">
-                                <span className="bg-[#bef264] text-[#022c22] w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">
-                                    {filteredCourses.length}
+                                <span className="bg-[#bef264] text-[#022c22] w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold transition-all">
+                                    {selectedForCompare.length}
                                 </span>
-                                <span className="text-sm font-medium">Courses found</span>
+                                <span className="text-sm font-medium">Courses selected for comparison</span>
+
+                                {/* Visual Indicators for Selected Slots */}
+                                <div className="flex gap-1 ml-2">
+                                    {[0, 1, 2].map((slotIndex) => (
+                                        <div
+                                            key={slotIndex}
+                                            className={`w-6 h-6 rounded-full border border-[#022c22] -ml-2 transition-colors duration-300 ${slotIndex < selectedForCompare.length ? 'bg-brand-lime' : 'bg-white/20'
+                                                }`}
+                                        ></div>
+                                    ))}
+                                </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <button onClick={clearAllFilters} className="text-xs text-brand-lime hover:underline hidden sm:block">Clear all</button>
+                                {selectedForCompare.length > 0 && (
+                                    <button onClick={() => setSelectedForCompare([])} className="text-xs text-brand-lime hover:underline hidden sm:block">Clear selection</button>
+                                )}
                                 <button
                                     onClick={() => {
                                         onClose();
-                                        if (onCompareNow) onCompareNow();
+                                        if (onCompareNow) onCompareNow(selectedForCompare);
                                     }}
-                                    className="bg-[#bef264] text-[#022c22] px-4 py-2 rounded-full text-xs font-bold hover:bg-[#a3e635] transition-colors shadow-lg"
+                                    disabled={selectedForCompare.length === 0}
+                                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all shadow-lg ${selectedForCompare.length > 0
+                                        ? 'bg-[#bef264] text-[#022c22] hover:bg-[#a3e635] cursor-pointer'
+                                        : 'bg-white/10 text-white/40 cursor-not-allowed opacity-70'
+                                        }`}
                                 >
                                     Compare Now <span className="ml-1">→</span>
                                 </button>
@@ -271,9 +305,21 @@ const CourseDiscoveryPopup = ({ isOpen, onClose }) => {
                                                         </div>
                                                     )}
 
-                                                    <div className="absolute top-3 right-3 bg-white/90 backdrop-blur text-gray-800 text-[10px] font-bold px-2 py-1 rounded-full flex items-center gap-1 cursor-pointer hover:bg-white transition-colors shadow-sm">
-                                                        COMPARE
-                                                    </div>
+                                                    <button
+                                                        onClick={() => handleToggleCompare(course.id)}
+                                                        className={`absolute top-3 right-3 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1 cursor-pointer transition-all shadow-sm ${selectedForCompare.includes(course.id)
+                                                                ? 'bg-[#022c22] text-[#bef264] border border-[#bef264]'
+                                                                : 'bg-white/90 backdrop-blur text-gray-800 hover:bg-white'
+                                                            }`}
+                                                    >
+                                                        {selectedForCompare.includes(course.id) ? (
+                                                            <>
+                                                                <CheckCircle size={12} className="text-[#bef264]" /> SELECTED
+                                                            </>
+                                                        ) : (
+                                                            'COMPARE'
+                                                        )}
+                                                    </button>
 
                                                     {/* Format Badge */}
                                                     <div className="absolute bottom-3 left-3 bg-black/60 backdrop-blur text-white text-[10px] font-bold px-2 py-1 rounded-full">
