@@ -12,8 +12,10 @@ import CoursesPage from './components/CoursesPage';
 import MentorProfile from './components/MentorProfile';
 import SupportHub from './components/SupportHub';
 import ChatbotWidget from './components/ChatbotWidget';
+import IntroAnimation from './components/IntroAnimation';
 
 function App() {
+  const [showIntro, setShowIntro] = useState(true);
   const [currentPage, setCurrentPage] = useState(() => {
     // Check local storage for the saved page, default to 'home'
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -90,6 +92,9 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300 flex flex-col font-sans text-gray-900 dark:text-gray-100">
+
+      {showIntro && <IntroAnimation onComplete={() => setShowIntro(false)} />}
+
       <Navbar
         theme={theme}
         toggleTheme={toggleTheme}
