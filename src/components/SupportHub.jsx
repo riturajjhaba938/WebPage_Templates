@@ -3,11 +3,11 @@ import { BookOpen, MonitorPlay, Calculator, GraduationCap, Users, PlusCircle, Me
 
 // Mock Data for the Hub based on user request & design
 const resources = [
-    { id: 1, title: 'Verification Guide', icon: <BookOpen className="text-red-500" size={24} />, bgColor: 'bg-red-50' },
-    { id: 2, title: 'Platform Tour', icon: <MonitorPlay className="text-blue-500" size={24} />, bgColor: 'bg-blue-50' },
-    { id: 3, title: 'Fee Calculator', icon: <Calculator className="text-red-500" size={24} />, bgColor: 'bg-red-50' },
-    { id: 4, title: 'Scholarship Info', icon: <GraduationCap className="text-green-500" size={24} />, bgColor: 'bg-green-50' },
-    { id: 5, title: 'Mentor Connect', icon: <Users className="text-blue-500" size={24} />, bgColor: 'bg-blue-50' },
+    { id: 1, title: 'Verification Guide', icon: <BookOpen className="text-red-500" size={24} />, bgColor: 'bg-red-50', link: 'https://example.com/verification-guide' },
+    { id: 2, title: 'Platform Tour', icon: <MonitorPlay className="text-blue-500" size={24} />, bgColor: 'bg-blue-50', link: 'https://example.com/platform-tour' },
+    { id: 3, title: 'Fee Calculator', icon: <Calculator className="text-red-500" size={24} />, bgColor: 'bg-red-50', link: 'https://example.com/fee-calculator' },
+    { id: 4, title: 'Scholarship Info', icon: <GraduationCap className="text-green-500" size={24} />, bgColor: 'bg-green-50', link: 'https://example.com/scholarship-info' },
+    { id: 5, title: 'Mentor Connect', icon: <Users className="text-blue-500" size={24} />, bgColor: 'bg-blue-50', link: '#mentor-connect' },
 ];
 
 const forums = [
@@ -73,19 +73,30 @@ const SupportHub = ({ onOpenChat }) => {
 
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                         {resources.map((item) => (
-                            <div key={item.id} className="bg-white dark:bg-gray-900 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 flex flex-col items-center justify-center text-center hover:border-[#84cc16] dark:hover:border-[#65a30d] hover:shadow-md transition-all cursor-pointer group">
+                            <a
+                                key={item.id}
+                                href={item.link}
+                                target={item.link.startsWith('http') ? "_blank" : "_self"}
+                                rel="noopener noreferrer"
+                                className="bg-white dark:bg-gray-900 rounded-2xl border-2 border-gray-100 dark:border-gray-800 p-6 flex flex-col items-center justify-center text-center hover:border-[#84cc16] dark:hover:border-[#65a30d] hover:shadow-md transition-all cursor-pointer group"
+                            >
                                 <div className={`w-14 h-14 ${item.bgColor} dark:bg-gray-800 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                                     {item.icon}
                                 </div>
                                 <span className="text-xs font-bold text-gray-800 dark:text-gray-200">{item.title}</span>
-                            </div>
+                            </a>
                         ))}
 
                         {/* More Button */}
-                        <div className="bg-[#0b3b24] dark:bg-[#064e3b] rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:bg-[#0f4d38] dark:hover:bg-[#022c22] transition-colors cursor-pointer text-white">
-                            <PlusCircle size={24} className="mb-4 text-[#84cc16]" />
+                        <a
+                            href="https://example.com/all-resources"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="bg-[#0b3b24] dark:bg-[#064e3b] rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:bg-[#0f4d38] dark:hover:bg-[#022c22] transition-colors cursor-pointer text-white block"
+                        >
+                            <PlusCircle size={24} className="mb-4 text-[#84cc16] mx-auto" />
                             <span className="text-xs font-bold">More</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
