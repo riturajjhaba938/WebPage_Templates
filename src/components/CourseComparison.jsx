@@ -37,7 +37,7 @@ const CourseComparison = ({ courseIds = [], onBack }) => {
                         <span>›</span>
                         <span className="text-white font-bold">Comparison Detail</span>
                     </div>
-                    <h1 className="text-4xl md:text-5xl font-black mb-3">Course Comparison</h1>
+                    <h1 className="text-4xl md:text-5xl font-black mb-3 text-white">Course Comparison</h1>
                     <p className="text-gray-400 text-sm max-w-xl">
                         Compare industry-leading certifications side-by-side to find the perfect curriculum for your career trajectory.
                     </p>
@@ -149,7 +149,7 @@ const CourseComparison = ({ courseIds = [], onBack }) => {
                         {coursesToCompare.map((course, index) => (
                             <div key={`action-${course.id}`} className={`p-6 flex flex-col items-center ${index < coursesToCompare.length - 1 ? 'md:border-r border-gray-700/50' : ''}`}>
                                 <a
-                                    href={course.link}
+                                    href={course.link || "#"}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="w-full sm:w-[80%] bg-[#38e567] text-[#022c22] font-black py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-[#2fd35b] transition-colors mb-3"
