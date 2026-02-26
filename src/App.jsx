@@ -17,23 +17,26 @@ import IntroAnimation from './components/IntroAnimation';
 function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [currentPage, setCurrentPage] = useState(() => {
-    // Check local storage for the saved page, default to 'home'
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const savedPage = window.localStorage.getItem('vedifai-current-page');
-      return savedPage || 'home';
+    // Check local session storage for the saved page, default to 'home'
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const savedPage = window.sessionStorage.getItem('currentPage');
+      return savedPage ? savedPage : 'home';
     }
     return 'home';
   });
+
   const [compareIds, setCompareIds] = useState(() => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      const savedIds = window.localStorage.getItem('vedifai-compare-ids');
-      return savedIds ? JSON.parse(savedIds) : [];
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const saved = window.sessionStorage.getItem('compareIds');
+      return saved ? JSON.parse(saved) : [];
     }
     return [];
-  }); // Store selected course IDs
+  });
+
   const [selectedMentorId, setSelectedMentorId] = useState(() => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      return window.localStorage.getItem('vedifai-mentor-id') || null;
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      const saved = window.sessionStorage.getItem('selectedMentorId');
+      return saved ? saved : null;
     }
     return null;
   });
@@ -68,16 +71,28 @@ function App() {
 
   // Persist routing state on change
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.localStorage) {
-      window.localStorage.setItem('vedifai-current-page', currentPage);
-      window.localStorage.setItem('vedifai-compare-ids', JSON.stringify(compareIds));
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.setItem('currentPage', currentPage);
+    }
+  }, [currentPage]);
+
+  // Persist compareIds
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
+      window.sessionStorage.setItem('compareIds', JSON.stringify(compareIds));
+    }
+  }, [compareIds]);
+
+  // Persist selectedMentorId
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.sessionStorage) {
       if (selectedMentorId) {
-        window.localStorage.setItem('vedifai-mentor-id', selectedMentorId);
+        window.sessionStorage.setItem('selectedMentorId', selectedMentorId);
       } else {
-        window.localStorage.removeItem('vedifai-mentor-id');
+        window.sessionStorage.removeItem('selectedMentorId');
       }
     }
-  }, [currentPage, compareIds, selectedMentorId]);
+  }, [selectedMentorId]);
 
   const navigateTo = (page, data = null) => {
     setCurrentPage(page);

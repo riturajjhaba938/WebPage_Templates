@@ -11,9 +11,9 @@ const resources = [
 ];
 
 const forums = [
-    { id: 1, title: 'How to verify teacher credentials in 2024?', replies: 12, time: '2h ago' },
-    { id: 2, title: 'Best React courses for beginners on Vedifai', replies: 45, time: '5h ago' },
-    { id: 3, title: 'Tips for managing online class schedules', replies: 8, time: '1d ago' },
+    { id: 1, title: 'How to verify teacher credentials in 2024?', replies: 12, time: '2h ago', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix&backgroundColor=b6e3f4' },
+    { id: 2, title: 'Best React courses for beginners on Vedifai', replies: 45, time: '5h ago', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Avery&backgroundColor=c0aede' },
+    { id: 3, title: 'Tips for managing online class schedules', replies: 8, time: '1d ago', avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Jocelyn&backgroundColor=ffdfbf' },
 ];
 
 const faqs = [
@@ -116,7 +116,9 @@ const SupportHub = ({ onOpenChat }) => {
                             <div className="space-y-3">
                                 {forums.map((forum) => (
                                     <div key={forum.id} className="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex gap-4 items-start">
-                                        <div className="w-10 h-10 rounded-full bg-[#f1f5f9] dark:bg-gray-700 shrink-0"></div>
+                                        <div className="w-10 h-10 rounded-full bg-[#f1f5f9] dark:bg-gray-700 shrink-0 overflow-hidden border border-gray-200 dark:border-gray-600">
+                                            <img src={forum.avatar} alt="User avatar" className="w-full h-full object-cover" />
+                                        </div>
                                         <div>
                                             <h3 className="font-bold text-gray-900 dark:text-white mb-1.5 leading-tight">{forum.title}</h3>
                                             <div className="flex gap-4 text-xs font-medium text-gray-500 dark:text-gray-400">
