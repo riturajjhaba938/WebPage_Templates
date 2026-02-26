@@ -17,7 +17,12 @@ const CourseComparison = ({ courseIds = [], onBack }) => {
     }
 
     // Determine grid columns based on number of courses (1 label column + up to 3 course columns)
-    const gridColsClass = `grid grid-cols-1 md:grid-cols-${coursesToCompare.length + 1}`;
+    const gridColsMap = {
+        1: 'grid grid-cols-1 md:grid-cols-2',
+        2: 'grid grid-cols-1 md:grid-cols-3',
+        3: 'grid grid-cols-1 md:grid-cols-4'
+    };
+    const gridColsClass = gridColsMap[coursesToCompare.length] || 'grid grid-cols-1 md:grid-cols-2';
 
     return (
         <div className="min-h-screen bg-[#11241a] text-white pt-24 pb-16 transition-colors duration-300">
