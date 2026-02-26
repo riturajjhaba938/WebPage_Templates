@@ -1,0 +1,26 @@
+[
+    {
+        "id": "career",
+        "text": "If you have career concerns clike here",
+        "cleanText": "I have career concerns",
+        "response": "Our career advisors are available to help you map out your journey! Please visit our 'Mentors' page to book a 1-on-1 session with an industry expert tailored to your field."
+    },
+    {
+        "id": "partner",
+        "text": "If you want to vedifai partner clike here",
+        "cleanText": "I want to become a Vedifai partner",
+        "response": "We love growing our network! To explore partnership opportunities, please email partners@vedifai.com with a brief overview of your proposal, and our team will get back to you within 48 hours."
+    },
+    {
+        "id": "products",
+        "text": "If you have concer related products and services clike here",
+        "cleanText": "I have concerns regarding products and services",
+        "response": "For issues regarding course access, billing, or platform bugs, our technical team is here to help. You can email support@vedifai.com or check our FAQ section on the Support Hub."
+    },
+    {
+        "id": "growth",
+        "text": "If you wann to know more about your growth program connect your growth manager",
+        "cleanText": "I want to know more about the growth program",
+        "response": "Your dedicated Growth Manager is ready to assist! You can schedule a direct catch-up through your student dashboard, or drop a message in the 'Growth Forum' to connect with them."
+    }
+]

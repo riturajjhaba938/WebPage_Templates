@@ -1,12 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot, User, ChevronDown } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Send, X, Bot, User } from 'lucide-react';
+import vedifaiLogo from '../assets/vedifai-logo.jpg';
+import chatbotData from '../data/chatbotData.json';
 
-const predefinedOptions = [
-    { id: 2, text: "If you have career concerns clike here", cleanText: "I have career concerns", response: "Our career advisors are available to help you map out your journey! Please visit our 'Mentors' page to book a 1-on-1 session with an industry expert tailored to your field." },
-    { id: 3, text: "If you want to vedifai partner clike here", cleanText: "I want to become a Vedifai partner", response: "We love partnering with great educators! Please send your portfolio and teaching experience to partnerships@vedifai.com and our team will get back to you within 48 hours." },
-    { id: 4, text: "If you have concer related products and services clike here", cleanText: "I have concerns regarding products and services", response: "For issues regarding course access, billing, or platform bugs, our technical team is here to help. You can email support@vedifai.com or check our FAQ section on the Support Hub." },
-    { id: 5, text: "If you wann to know more about your growth program connect your growth manager", cleanText: "I want to connect with my growth manager", response: "Your Growth Manager is your personal guide to success. You can schedule your monthly sync via your student dashboard under the 'My Growth' tab." }
-];
+const predefinedOptions = chatbotData;
 
 const ChatbotWidget = ({ isOpen, onClose }) => {
     const [messages, setMessages] = useState([

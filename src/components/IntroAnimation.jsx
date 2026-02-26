@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import mascotImage from '../assets/mascot-loader.png';
+import mascotImage from '../assets/loading-logo.jpg';
 
 const IntroAnimation = ({ onComplete }) => {
     const [isFadingOut, setIsFadingOut] = useState(false);
@@ -45,7 +45,7 @@ const IntroAnimation = ({ onComplete }) => {
                 <img
                     src={mascotImage}
                     alt="Vedifai Mascot Loading"
-                    className="w-48 h-48 object-contain relative z-10 animate-[pulse_1.5s_ease-in-out_infinite] drop-shadow-[0_0_15px_rgba(140,198,63,0.5)]"
+                    className="w-48 h-48 rounded-full object-cover relative z-10 animate-[pulse_1.5s_ease-in-out_infinite] drop-shadow-[0_0_15px_rgba(140,198,63,0.5)]"
                 />
             </div>
 
