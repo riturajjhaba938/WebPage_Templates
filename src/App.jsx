@@ -144,7 +144,7 @@ function App() {
         ) : currentPage === 'support' ? (
           <SupportHub onOpenChat={() => setIsChatOpen(true)} />
         ) : (
-          <CourseComparison courseIds={compareIds} onBack={() => navigateTo('home')} />
+          <CourseComparison courseIds={compareIds} onBack={() => navigateTo('home')} onNavigate={navigateTo} />
         )}
       </main>
 

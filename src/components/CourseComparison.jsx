@@ -2,7 +2,7 @@ import React from 'react';
 import { CheckCircle, Clock, Star, Users, MessageSquareText, UsersRound } from 'lucide-react';
 import coursesData from '../data/coursesData.json';
 
-const CourseComparison = ({ courseIds = [], onBack }) => {
+const CourseComparison = ({ courseIds = [], onBack, onNavigate }) => {
     // Map selected IDs to actual course data
     const coursesToCompare = courseIds.map(id => coursesData.find(c => c.id === id)).filter(Boolean);
 
@@ -31,9 +31,9 @@ const CourseComparison = ({ courseIds = [], onBack }) => {
                 {/* Breadcrumbs & Header */}
                 <div className="mb-10">
                     <div className="text-xs text-gray-400 mb-4 flex items-center gap-2">
-                        <button onClick={onBack} className="hover:text-brand-lime transition-colors cursor-pointer">Home</button>
+                        <button onClick={() => onNavigate('home')} className="hover:text-brand-lime transition-colors cursor-pointer">Home</button>
                         <span>›</span>
-                        <span className="hover:text-brand-lime transition-colors cursor-pointer">Course Search</span>
+                        <button onClick={() => onNavigate('courses')} className="hover:text-brand-lime transition-colors cursor-pointer">Course Search</button>
                         <span>›</span>
                         <span className="text-white font-bold">Comparison Detail</span>
                     </div>

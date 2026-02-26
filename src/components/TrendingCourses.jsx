@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BookOpen, Star, ArrowRight } from 'lucide-react';
 import CourseDiscoveryPopup from './CourseDiscoveryPopup';
+import CourseDetailsPopup from './CourseDetailsPopup';
 
 import coursesData from '../data/coursesData.json';
 
@@ -8,6 +9,7 @@ const courses = coursesData.filter(c => c.trending);
 
 const TrendingCourses = ({ onCompare }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [selectedCourse, setSelectedCourse] = useState(null);
 
     return (
         <section className="bg-white dark:bg-gray-900 py-4 transition-colors duration-300">
@@ -29,7 +31,11 @@ const TrendingCourses = ({ onCompare }) => {
                     {/* Slots Grid */}
                     <div className="flex flex-wrap justify-center gap-6">
                         {courses.map((course) => (
-                            <div key={course.id} className="bg-white dark:bg-gray-800 rounded-xl w-40 h-48 md:w-44 md:h-52 shadow-sm border-2 border-transparent dark:border-gray-700 hover:border-black/10 dark:hover:border-[#bef264]/50 transition-all cursor-pointer flex flex-col overflow-hidden group relative">
+                            <div
+                                key={course.id}
+                                onClick={() => setSelectedCourse(course)}
+                                className="bg-white dark:bg-gray-800 rounded-xl w-40 h-48 md:w-44 md:h-52 shadow-sm border-2 border-transparent dark:border-gray-700 hover:border-black/10 dark:hover:border-[#bef264]/50 transition-all cursor-pointer flex flex-col overflow-hidden group relative"
+                            >
 
                                 {/* Image Area */}
                                 <div className="h-3/5 w-full bg-gray-100 relative overflow-hidden">
@@ -66,6 +72,7 @@ const TrendingCourses = ({ onCompare }) => {
                 </div>
             </div>
             <CourseDiscoveryPopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} onCompareNow={onCompare} />
+            <CourseDetailsPopup course={selectedCourse} isOpen={!!selectedCourse} onClose={() => setSelectedCourse(null)} />
         </section >
     );
 };
