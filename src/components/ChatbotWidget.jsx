@@ -52,7 +52,7 @@ const ChatbotWidget = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-3rem)] bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col z-[100] overflow-hidden transition-all duration-300 font-sans">
+        <div className="fixed bottom-6 right-6 w-96 max-w-[calc(100vw-3rem)] max-h-[calc(100vh-5rem)] bg-white dark:bg-gray-800 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col z-[100] overflow-hidden transition-all duration-300 font-sans">
 
             {/* Header */}
             <div className="bg-[#0f4d38] dark:bg-[#064e3b] p-4 flex items-center justify-between text-white border-b border-white/10 relative overflow-hidden">
