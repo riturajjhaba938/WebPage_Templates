@@ -17,6 +17,11 @@ import IntroAnimation from './components/IntroAnimation';
 function App() {
   const [showIntro, setShowIntro] = useState(true);
   const [currentPage, setCurrentPage] = useState(() => {
+    // Check initial URL hash first
+    const hash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : '';
+    if (hash && ['home', 'courses', 'comparison', 'support', 'mentorProfile'].includes(hash)) {
+      return hash;
+    }
     // Check local session storage for the saved page, default to 'home'
     if (typeof window !== 'undefined' && window.sessionStorage) {
       const savedPage = window.sessionStorage.getItem('currentPage');
@@ -94,7 +99,29 @@ function App() {
     }
   }, [selectedMentorId]);
 
-  const navigateTo = (page, data = null) => {
+  // Handle browser back/forward buttons
+  useEffect(() => {
+    const handlePopState = (event) => {
+      if (event.state && event.state.page) {
+        setCurrentPage(event.state.page);
+        if (event.state.page === 'comparison' && event.state.data) setCompareIds(event.state.data);
+        if (event.state.page === 'mentorProfile' && event.state.data) setSelectedMentorId(event.state.data);
+      } else {
+        const hash = window.location.hash.replace('#', '') || 'home';
+        setCurrentPage(hash);
+      }
+    };
+
+    // Set initial state for the first history entry
+    if (typeof window !== 'undefined' && !window.history.state) {
+      window.history.replaceState({ page: currentPage, data: currentPage === 'comparison' ? compareIds : (currentPage === 'mentorProfile' ? selectedMentorId : null) }, '', `#${currentPage}`);
+    }
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [currentPage, compareIds, selectedMentorId]);
+
+  const navigateTo = (page, data = null, replace = false) => {
     setCurrentPage(page);
     if (page === 'comparison' && data) {
       setCompareIds(data);
@@ -103,6 +130,14 @@ function App() {
       setSelectedMentorId(data);
     }
     window.scrollTo(0, 0);
+
+    const state = { page, data };
+    const url = `#${page}`;
+    if (replace) {
+      window.history.replaceState(state, '', url);
+    } else {
+      window.history.pushState(state, '', url);
+    }
   };
 
   return (

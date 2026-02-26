@@ -5,8 +5,8 @@ const CourseDetailsPopup = ({ course, isOpen, onClose }) => {
     if (!isOpen || !course) return null;
 
     return (
-        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="bg-white dark:bg-gray-800 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden relative border border-gray-200 dark:border-gray-700 max-h-[90vh] flex flex-col">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="bg-white dark:bg-gray-800 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden relative border border-gray-200 dark:border-gray-700 max-h-[90vh] sm:max-h-[85vh] flex flex-col">
                 {/* Close Button */}
                 <button
                     onClick={onClose}
