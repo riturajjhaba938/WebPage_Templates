@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { BookOpen, Star, ArrowRight } from 'lucide-react';
 import CourseDiscoveryPopup from './CourseDiscoveryPopup';
 
-import platformData from '../data/platformData.json';
+import coursesData from '../data/coursesData.json';
 
-const courses = platformData.courses.filter(c => c.trending);
+const courses = coursesData.filter(c => c.trending);
 
 const TrendingCourses = ({ onCompare }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);

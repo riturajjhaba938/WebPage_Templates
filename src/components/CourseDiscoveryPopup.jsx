@@ -1,9 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import { Search, X, CheckCircle, SlidersHorizontal, ChevronLeft, ChevronRight, Star, Filter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import platformData from '../data/platformData.json';
+import coursesData from '../data/coursesData.json';
 
-const allSubjects = [...new Set(platformData.courses.map(c => c.subject))];
+const allSubjects = [...new Set(coursesData.map(c => c.subject))];
 
 const CourseDiscoveryPopup = ({ isOpen, onClose, onCompareNow }) => {
     const [searchQuery, setSearchQuery] = useState('');
@@ -19,7 +19,7 @@ const CourseDiscoveryPopup = ({ isOpen, onClose, onCompareNow }) => {
 
     // Filter Logic
     const filteredCourses = useMemo(() => {
-        let result = platformData.courses.filter(course => {
+        let result = coursesData.filter(course => {
             // Search
             const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                 course.mentor.toLowerCase().includes(searchQuery.toLowerCase());
@@ -308,8 +308,8 @@ const CourseDiscoveryPopup = ({ isOpen, onClose, onCompareNow }) => {
                                                     <button
                                                         onClick={() => handleToggleCompare(course.id)}
                                                         className={`absolute top-3 right-3 text-[10px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1 cursor-pointer transition-all shadow-sm ${selectedForCompare.includes(course.id)
-                                                                ? 'bg-[#022c22] text-[#bef264] border border-[#bef264]'
-                                                                : 'bg-white/90 backdrop-blur text-gray-800 hover:bg-white'
+                                                            ? 'bg-[#022c22] text-[#bef264] border border-[#bef264]'
+                                                            : 'bg-white/90 backdrop-blur text-gray-800 hover:bg-white'
                                                             }`}
                                                     >
                                                         {selectedForCompare.includes(course.id) ? (

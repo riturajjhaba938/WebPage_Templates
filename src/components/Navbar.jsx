@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X, User, Bell, Sun, Moon } from 'lucide-react';
 
-const Navbar = ({ theme, toggleTheme }) => {
+const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = () => { }, onSupportClick = () => { } }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -10,7 +10,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                 <div className="flex justify-between items-center h-16">
 
                     {/* Logo with New Image and Brand Name */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 cursor-pointer" onClick={onHomeClick}>
                         <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Logo" className="h-[50px] w-auto object-contain rounded-lg" />
                         <span className="text-xl font-bold tracking-tighter text-brand dark:text-white transition-colors">VEDIFAI</span>
                     </div>
@@ -18,9 +18,9 @@ const Navbar = ({ theme, toggleTheme }) => {
                     {/* Desktop Menu */}
                     <div className="hidden md:flex items-center space-x-1">
                         <div className="flex bg-[#bef264] dark:bg-[#a3e635]/20 rounded-lg p-1 space-x-1 transition-colors duration-300">
-                            <a href="#" className="px-4 py-1.5 rounded-md bg-[#4ade80] dark:bg-[#4ade80]/90 text-white font-bold text-xs shadow-sm">HOME</a>
-                            <a href="#" className="px-4 py-1.5 rounded-md hover:bg-white/50 dark:hover:bg-white/10 text-[#064e3b] dark:text-[#a3e635] font-bold text-xs transition-colors">COURSES</a>
-                            <a href="#" className="px-4 py-1.5 rounded-md hover:bg-white/50 dark:hover:bg-white/10 text-[#064e3b] dark:text-[#a3e635] font-bold text-xs transition-colors">SUPPORT</a>
+                            <button onClick={onHomeClick} className="px-4 py-1.5 rounded-md hover:bg-white/50 dark:hover:bg-white/10 text-[#064e3b] dark:text-[#a3e635] font-bold text-xs shadow-sm transition-colors cursor-pointer">HOME</button>
+                            <button onClick={onCoursesClick} className="px-4 py-1.5 rounded-md hover:bg-white/50 dark:hover:bg-white/10 text-[#064e3b] dark:text-[#a3e635] font-bold text-xs transition-colors cursor-pointer">COURSES</button>
+                            <button onClick={onSupportClick} className="px-4 py-1.5 rounded-md hover:bg-[#84cc16] hover:text-white dark:hover:bg-[#84cc16] text-[#064e3b] dark:text-[#a3e635] font-bold text-xs transition-colors cursor-pointer">SUPPORT</button>
                         </div>
 
                         {/* Theme Toggle */}
@@ -65,9 +65,9 @@ const Navbar = ({ theme, toggleTheme }) => {
             {isOpen && (
                 <div className="md:hidden bg-white dark:bg-gray-900 shadow-lg absolute top-full left-0 right-0 border-t border-gray-100 dark:border-gray-800 transition-colors duration-300">
                     <div className="flex flex-col p-4 space-y-2">
-                        <a href="#" className="font-bold text-gray-900 dark:text-white py-2 border-b border-gray-50 dark:border-gray-800">HOME</a>
-                        <a href="#" className="font-bold text-gray-600 dark:text-gray-400 py-2 border-b border-gray-50 dark:border-gray-800">COURSES</a>
-                        <a href="#" className="font-bold text-gray-600 dark:text-gray-400 py-2">SUPPORT</a>
+                        <button onClick={() => { onHomeClick(); setIsOpen(false); }} className="text-left font-bold text-gray-900 dark:text-white py-2 border-b border-gray-50 dark:border-gray-800 cursor-pointer">HOME</button>
+                        <button onClick={() => { onCoursesClick(); setIsOpen(false); }} className="text-left font-bold text-gray-600 dark:text-gray-400 py-2 border-b border-gray-50 dark:border-gray-800 cursor-pointer">COURSES</button>
+                        <button onClick={() => { onSupportClick(); setIsOpen(false); }} className="text-left font-bold text-gray-600 dark:text-gray-400 py-2 cursor-pointer">SUPPORT</button>
                     </div>
                 </div>
             )}

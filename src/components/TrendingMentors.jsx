@@ -1,11 +1,11 @@
 import React from 'react';
 import { Linkedin, Twitter, Globe, Github } from 'lucide-react';
 
-import platformData from '../data/platformData.json';
+import mentorsData from '../data/mentorsData.json';
 
-const mentors = platformData.mentors.filter(m => m.trending);
+const mentors = mentorsData.filter(m => m.trending);
 
-const TrendingMentors = () => {
+const TrendingMentors = ({ onNavigate }) => {
     return (
         <section className="bg-white dark:bg-gray-900 py-4 mb-4 transition-colors duration-300">
             <div className="max-w-6xl mx-auto px-4">
@@ -21,7 +21,7 @@ const TrendingMentors = () => {
                     {/* Slots Grid */}
                     <div className="flex flex-wrap justify-center gap-6">
                         {mentors.map((mentor) => (
-                            <div key={mentor.id} className="group relative w-32 h-44 md:w-36 md:h-48 perspective-1000 cursor-pointer">
+                            <div key={mentor.id} onClick={() => onNavigate && onNavigate('mentorProfile', mentor.id)} className="group relative w-32 h-44 md:w-36 md:h-48 perspective-1000 cursor-pointer">
                                 <div className="relative w-full h-full transition-all duration-500 transform style-preserve-3d group-hover:rotate-y-180">
 
                                     {/* Front Side */}

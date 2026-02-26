@@ -1,0 +1,149 @@
+[
+    {
+        "id": 1,
+        "name": "Dr. Sarah Johnson",
+        "role": "Senior Data Scientist & AI Educator",
+        "company": "Google DeepMind",
+        "bio": "Pioneering research in generative models.",
+        "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150",
+        "trending": true,
+        "verified": true,
+        "hourlyRate": 49,
+        "successRate": "98%",
+        "experience": "12+ Yrs",
+        "students": "5,000+",
+        "availability": "HIGH",
+        "about": "I am a passionate educator and data scientist with over a decade of experience in building enterprise-grade AI solutions. My mission is to bridge the gap between theoretical computer science and practical industrial application.\n\nHaving mentored over 5,000 students globally, I specialize in simplifying complex algorithms and helping students build robust portfolios that land them jobs at top-tier tech companies. My approach is hands-on, project-based, and strictly verified for quality.",
+        "tags": [
+            "Machine Learning",
+            "Python",
+            "DataViz",
+            "AI Ethics"
+        ],
+        "courses": [
+            2,
+            8
+        ],
+        "videoPreview": "https://example.com/sarah-intro.mp4",
+        "videoThumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=450",
+        "reviews": [
+            {
+                "text": "Sarah's data science roadmap was the turning point in my career transition. Highly recommended!",
+                "author": "Alex Chen",
+                "authorRole": "ML Engineer @ TechCorp",
+                "authorImage": "https://ui-avatars.com/api/?name=Alex+Chen&background=cbd5e1&color=334155"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Vikram Singh",
+        "role": "Sr. Backend Eng.",
+        "company": "Amazon",
+        "bio": "Architecting scalable cloud solutions.",
+        "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150",
+        "trending": true,
+        "verified": true,
+        "hourlyRate": 55,
+        "successRate": "95%",
+        "experience": "10+ Yrs",
+        "students": "3,000+",
+        "availability": "MEDIUM",
+        "about": "Specializing in distributed systems and highly scalable cloud architectures. I focus on backend performance, microservices, and system design.",
+        "tags": [
+            "System Design",
+            "AWS",
+            "Node.js",
+            "Microservices"
+        ],
+        "courses": [
+            1,
+            5,
+            6
+        ],
+        "videoPreview": "https://example.com/vikram-intro.mp4",
+        "videoThumbnail": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800&h=450",
+        "reviews": []
+    },
+    {
+        "id": 3,
+        "name": "Kavita Patel",
+        "role": "Product Lead",
+        "company": "Cred",
+        "bio": "Building fintech products for the next billion.",
+        "image": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150&h=150",
+        "trending": true,
+        "verified": true,
+        "hourlyRate": 60,
+        "successRate": "96%",
+        "experience": "8+ Yrs",
+        "students": "4,200+",
+        "availability": "HIGH",
+        "about": "Product management expert focusing on user-centric design and agile execution. I help transition aspiring PMs into product leaders.",
+        "tags": [
+            "Product Management",
+            "Agile",
+            "User Research"
+        ],
+        "courses": [],
+        "videoPreview": "",
+        "videoThumbnail": "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?auto=format&fit=crop&q=80&w=800&h=450",
+        "reviews": []
+    },
+    {
+        "id": 4,
+        "name": "Arjun Red",
+        "role": "Tech Lead",
+        "company": "Zomato",
+        "bio": "Full stack wizard obsessed with performance.",
+        "image": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150",
+        "trending": true,
+        "verified": true,
+        "hourlyRate": 45,
+        "successRate": "92%",
+        "experience": "7+ Yrs",
+        "students": "2,800+",
+        "availability": "LOW",
+        "about": "Passionate about building fast, responsive, and robust full stack applications using the MERN stack.",
+        "tags": [
+            "React",
+            "Performance",
+            "Full Stack"
+        ],
+        "courses": [
+            1,
+            5,
+            6
+        ],
+        "videoPreview": "",
+        "videoThumbnail": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&q=80&w=800&h=450",
+        "reviews": []
+    },
+    {
+        "id": 5,
+        "name": "Sneha Gupta",
+        "role": "Data Scientist",
+        "company": "Microsoft",
+        "bio": "Turning raw data into actionable insights.",
+        "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150",
+        "trending": true,
+        "verified": true,
+        "hourlyRate": 50,
+        "successRate": "99%",
+        "experience": "9+ Yrs",
+        "students": "6,100+",
+        "availability": "HIGH",
+        "about": "Data science professional with a knack for storytelling through data. I demystify complex statistical concepts for beginners and advanced learners alike.",
+        "tags": [
+            "Data Analytics",
+            "SQL",
+            "PowerBI"
+        ],
+        "courses": [
+            2
+        ],
+        "videoPreview": "",
+        "videoThumbnail": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&q=80&w=800&h=450",
+        "reviews": []
+    }
+]

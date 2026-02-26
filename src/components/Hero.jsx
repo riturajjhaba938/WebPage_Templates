@@ -229,10 +229,10 @@ const Hero = () => {
                 </p>
 
                 <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button className="flex items-center justify-center gap-2 bg-[#022c22] dark:bg-[#a3e635] text-white dark:text-[#064e3b] px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-default dark:hover:bg-[#bef264] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 w-full sm:w-auto">
+                    <button onClick={() => onNavigate('courses')} className="flex items-center justify-center gap-2 bg-[#022c22] dark:bg-[#a3e635] text-white dark:text-[#064e3b] px-8 py-4 rounded-full font-bold text-lg hover:bg-brand-default dark:hover:bg-[#bef264] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 w-full sm:w-auto cursor-pointer">
                         Find Tutors Now <ArrowRight size={20} />
                     </button>
-                    <button className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-2 border-gray-200 dark:border-gray-700 px-8 py-4 rounded-full font-bold text-lg hover:border-[#bef264] dark:hover:border-[#bef264] hover:bg-[#f7fee7] dark:hover:bg-gray-700 transition-all duration-300 w-full sm:w-auto">
+                    <button onClick={() => onNavigate('courses')} className="flex items-center justify-center gap-2 bg-white dark:bg-gray-800 text-gray-800 dark:text-white border-2 border-gray-200 dark:border-gray-700 px-8 py-4 rounded-full font-bold text-lg hover:border-[#bef264] dark:hover:border-[#bef264] hover:bg-[#f7fee7] dark:hover:bg-gray-700 transition-all duration-300 w-full sm:w-auto cursor-pointer">
                         <Play size={20} className="text-[#65a30d] dark:text-[#bef264]" fill="currentColor" /> See How It Works
                     </button>
                 </div>

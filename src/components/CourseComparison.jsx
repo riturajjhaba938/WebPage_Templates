@@ -1,10 +1,10 @@
 import React from 'react';
 import { CheckCircle, Clock, Star, Users, MessageSquareText, UsersRound } from 'lucide-react';
-import platformData from '../data/platformData.json';
+import coursesData from '../data/coursesData.json';
 
 const CourseComparison = ({ courseIds = [], onBack }) => {
     // Map selected IDs to actual course data
-    const coursesToCompare = courseIds.map(id => platformData.courses.find(c => c.id === id)).filter(Boolean);
+    const coursesToCompare = courseIds.map(id => coursesData.find(c => c.id === id)).filter(Boolean);
 
     // Fallback if no courses are selected (shouldn't happen with the new logic, but good practice)
     if (coursesToCompare.length === 0) {
