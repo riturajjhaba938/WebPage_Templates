@@ -184,9 +184,14 @@ const SupportHub = ({ onOpenChat }) => {
             </div>
 
             {/* Simple Bottom Banner mimicking design */}
-            <div className="mt-24 h-16 bg-[#84cc16] w-full relative">
-                <a href="https://example.com/about-us" target="_blank" rel="noopener noreferrer" className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-full w-36 h-10 bg-[#022c22] rounded-t-2xl flex items-center justify-center hover:bg-[#064e3b] transition-colors cursor-pointer shadow-lg">
-                    <span className="text-white text-xs font-bold uppercase tracking-widest">About Us</span>
+            <div className="mt-24 h-24 bg-[#8cc63f] w-full flex items-center justify-center">
+                <a
+                    href="https://example.com/about-us"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#022c22] text-white font-bold px-8 py-3 rounded-full hover:bg-[#064e3b] transition-colors shadow-lg text-sm tracking-wide"
+                >
+                    About Us
                 </a>
             </div>
 

@@ -73,10 +73,11 @@ const ChatbotWidget = ({ isOpen, onClose }) => {
                 </div>
                 <button
                     onClick={onClose}
-                    className="p-2 hover:bg-white/10 rounded-full transition-colors relative z-10"
+                    className="p-2 hover:bg-white/10 rounded-full transition-colors relative z-10 text-white/80 hover:text-white"
+                    title="Close Chat"
                     aria-label="Close Chat"
                 >
-                    <ChevronDown size={20} />
+                    <X size={20} />
                 </button>
             </div>
 
