@@ -81,6 +81,16 @@ const MentorProfile = ({ mentorId, onBack, onCourseClick }) => {
                                         <div className="text-xl font-black text-[#0f172a] dark:text-white">{mentor.students}</div>
                                     </div>
                                 </div>
+
+                                {/* Action Buttons */}
+                                <div className="mt-6 flex justify-center sm:justify-start">
+                                    <a
+                                        href={mentor.bookingLink || "/#book-now"}
+                                        className="bg-[#022c22] dark:bg-[#a3e635] text-white dark:text-[#064e3b] px-8 py-3 rounded-full font-bold text-sm shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
+                                    >
+                                        <Calendar size={18} /> Book Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
