@@ -26,31 +26,38 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                 <div className="flex justify-between items-center h-16">
 
                     {/* Logo with New Image and Animated Brand Name */}
-                    <div className="flex items-center gap-2 cursor-pointer max-w-[50%] md:max-w-[40%] overflow-hidden" onClick={onHomeClick}>
+                    <div className="flex items-center gap-2 cursor-pointer w-[60%] md:w-auto md:min-w-[300px]" onClick={onHomeClick}>
                         <img src={vedifaiLogo} alt="Vedifai Logo" className="h-[40px] md:h-[50px] w-auto object-contain rounded-lg flex-shrink-0" />
-                        <div className="h-[50px] flex items-center relative flex-1 overflow-hidden">
+                        <div className="flex items-center">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={textIndex}
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    exit={{ opacity: 0, x: 10 }}
                                     transition={{ duration: 0.5 }}
-                                    className="absolute left-0 w-full"
+                                    className="w-full flex"
                                 >
-                                    {/* Typing Effect wrapper manually splitting child chars */}
-                                    <span className={`font-bold tracking-tight text-brand dark:text-white transition-colors ${textIndex === 0 ? 'text-xl md:text-2xl uppercase tracking-tighter' : 'text-[10px] md:text-sm leading-tight'}`}>
-                                        {PREDEFINED_TEXTS[textIndex].split('').map((char, index) => (
-                                            <motion.span
-                                                key={`${textIndex}-${index}`}
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                transition={{ duration: 0.05, delay: index * 0.03 }}
-                                            >
-                                                {char}
-                                            </motion.span>
+                                    {/* Typing Effect wrapper wrapping words so they don't break characters mid-word */}
+                                    <div className={`font-bold text-gray-900 dark:text-white transition-colors flex flex-wrap gap-x-1 ${textIndex === 0 ? 'text-xl md:text-2xl tracking-tighter uppercase' : 'text-[11px] leading-[1.2] md:text-sm md:leading-tight'}`}>
+                                        {PREDEFINED_TEXTS[textIndex].split(' ').map((word, wordIndex) => (
+                                            <span key={`${textIndex}-w${wordIndex}`} className="whitespace-nowrap flex">
+                                                {word.split('').map((char, charIndex) => {
+                                                    const globalIndex = PREDEFINED_TEXTS[textIndex].substring(0, PREDEFINED_TEXTS[textIndex].indexOf(word)).length + charIndex;
+                                                    return (
+                                                        <motion.span
+                                                            key={`${textIndex}-c${globalIndex}`}
+                                                            initial={{ opacity: 0 }}
+                                                            animate={{ opacity: 1 }}
+                                                            transition={{ duration: 0.05, delay: globalIndex * 0.03 }}
+                                                        >
+                                                            {char}
+                                                        </motion.span>
+                                                    );
+                                                })}
+                                            </span>
                                         ))}
-                                    </span>
+                                    </div>
                                 </motion.div>
                             </AnimatePresence>
                         </div>
