@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import vedifaiLogo from '../assets/vedifai-logo.jpg';
 import { Menu, X, User, Bell, Sun, Moon } from 'lucide-react';
 
 const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = () => { }, onSupportClick = () => { } }) => {
@@ -11,7 +12,7 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
 
                     {/* Logo with New Image and Brand Name */}
                     <div className="flex items-center gap-2 cursor-pointer" onClick={onHomeClick}>
-                        <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Logo" className="h-[50px] w-auto object-contain rounded-lg" />
+                        <img src={vedifaiLogo} alt="Vedifai Logo" className="h-[50px] w-auto object-contain rounded-lg" />
                         <span className="text-xl font-bold tracking-tighter text-brand dark:text-white transition-colors">VEDIFAI</span>
                     </div>
 

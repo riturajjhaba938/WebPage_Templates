@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Star, Play, ArrowRight, ShieldCheck, MapPin, CheckCircle, Users } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import vedifaiLogo from '../assets/vedifai-logo.jpg';
 
 // Mock Data for Slides - focusing specifically on Vedifai's value proposition
 const heroSlides = [
@@ -207,7 +208,7 @@ const Hero = () => {
             <div className="bg-white dark:bg-gray-900 py-16 md:py-24 text-center px-4 relative transition-colors duration-300">
                 {/* Visual overlap connector */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-xl overflow-hidden p-2 transition-colors duration-300">
-                    <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Logo Icon" className="w-full h-full object-contain rounded-full" />
+                    <img src={vedifaiLogo} alt="Vedifai Logo Icon" className="w-full h-full object-contain rounded-full" />
                 </div>
 
                 <div className="inline-flex items-center gap-2 bg-[#F3FCE3] dark:bg-[#a3e635]/10 px-6 py-2.5 rounded-full mb-8 shadow-sm border border-[#d9f99d] dark:border-[#a3e635]/30 transform hover:-translate-y-1 transition-all duration-300 cursor-pointer mt-8">

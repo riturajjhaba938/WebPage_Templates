@@ -58,7 +58,7 @@ const ChatbotWidget = ({ isOpen, onClose }) => {
 
                 <div className="flex items-center gap-3 relative z-10">
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center border-2 border-[#a3e635] shadow-sm overflow-hidden shrink-0">
-                        <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Mascot" className="w-full h-full object-cover" />
+                        <img src={vedifaiLogo} alt="Vedifai Mascot" className="w-full h-full object-cover" />
                     </div>
                     <div>
                         <h3 className="font-bold text-base leading-tight">Vedifai Support</h3>
@@ -87,7 +87,7 @@ const ChatbotWidget = ({ isOpen, onClose }) => {
                             {/* Avatar */}
                             {msg.sender === 'bot' ? (
                                 <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shrink-0 border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm">
-                                    <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Mascot" className="w-full h-full object-cover" />
+                                    <img src={vedifaiLogo} alt="Vedifai Mascot" className="w-full h-full object-cover" />
                                 </div>
                             ) : (
                                 <div className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center shrink-0 border border-gray-300 dark:border-gray-600">

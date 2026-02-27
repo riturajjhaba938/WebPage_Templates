@@ -1,5 +1,6 @@
 import React from 'react';
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import vedifaiLogo from '../assets/vedifai-logo.jpg';
 
 const Footer = ({ onNavigate }) => {
     return (
@@ -10,7 +11,7 @@ const Footer = ({ onNavigate }) => {
                     {/* Brand Column */}
                     <div className="space-y-4">
                         <div className="flex items-center gap-2">
-                            <img src="/src/assets/vedifai-logo.jpg" alt="Vedifai Logo" className="h-[40px] w-auto object-contain rounded-lg" />
+                            <img src={vedifaiLogo} alt="Vedifai Logo" className="h-[40px] w-auto object-contain rounded-lg" />
                             <h3 className="text-2xl font-bold tracking-tighter text-brand">VEDIFAI</h3>
                         </div>
                         <p className="text-gray-400 text-sm leading-relaxed">
