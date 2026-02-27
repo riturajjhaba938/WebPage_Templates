@@ -391,9 +391,9 @@ const CourseDiscoveryPopup = ({ isOpen, onClose, onCompareNow }) => {
                                             <h3 className="font-bold text-gray-800 dark:text-gray-200 text-sm mb-2 group-hover:text-[#022c22] transition-colors">
                                                 Can't find what you're looking for?
                                             </h3>
-                                            <button className="text-xs font-bold text-brand-lime dark:text-[#a3e635] hover:underline cursor-pointer bg-brand-lime/10 px-3 py-1.5 rounded-full mt-2">
+                                            <a href="#request-course" className="text-xs font-bold text-brand-lime dark:text-[#a3e635] hover:underline cursor-pointer bg-brand-lime/10 px-3 py-1.5 rounded-full mt-2 block w-fit">
                                                 Request a verified course
-                                            </button>
+                                            </a>
                                         </motion.div>
                                     )}
                                 </motion.div>

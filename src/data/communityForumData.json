@@ -1,0 +1,118 @@
+[
+    {
+        "id": "post_001",
+        "authorName": "Aarav Sharma",
+        "authorRole": "Student - BSC CS",
+        "authorImage": "https://i.pravatar.cc/150?u=a042581f4e29026024d",
+        "timestamp": "2023-11-20T10:30:00Z",
+        "title": "Need recommendations for Advanced Python Tutors",
+        "content": "Hi everyone! I'm looking to transition from basic scripting to creating full-stack web applications. Can anyone recommend a good verified mentor on Vedifai for Advanced Python, specifically covering Django and REST APIs?",
+        "tags": [
+            "Python",
+            "Web Development",
+            "Recommendations"
+        ],
+        "upvotes": 42,
+        "repliesCount": 3,
+        "replies": [
+            {
+                "id": "reply_001_1",
+                "authorName": "Priya Patel",
+                "authorRole": "Vedifai Verified Mentor",
+                "authorImage": "https://i.pravatar.cc/150?u=a042581f4e29026704d",
+                "timestamp": "2023-11-20T11:15:00Z",
+                "content": "Hi Aarav! I highly recommend checking out Rahul Verma's profile. He has a fantastic series on Django routing and his verified rating is 4.9. I took his masterclass last year and it was incredibly helpful.",
+                "upvotes": 15
+            },
+            {
+                "id": "reply_001_2",
+                "authorName": "Arjun Singh",
+                "authorRole": "Alumni",
+                "authorImage": "https://i.pravatar.cc/150?u=a04258114e29026702d",
+                "timestamp": "2023-11-21T09:20:00Z",
+                "content": "Seconding Priya's suggestion! Also, make sure to filter the Courses page by 'Highest Rated' for Python. You'll find a lot of hidden gems there.",
+                "upvotes": 8
+            }
+        ]
+    },
+    {
+        "id": "post_002",
+        "authorName": "Neha Gupta",
+        "authorRole": "Freelance Designer",
+        "authorImage": "https://i.pravatar.cc/150?img=47",
+        "timestamp": "2023-11-24T14:45:00Z",
+        "title": "How does the 'Smart Match' algorithm work?",
+        "content": "I'm a bit confused about how Vedifai matches students to mentors. Does it prioritize location, or is it based strictly on the skills you select during signup?",
+        "tags": [
+            "Platform Features",
+            "Smart Match",
+            "FAQ"
+        ],
+        "upvotes": 128,
+        "repliesCount": 1,
+        "replies": [
+            {
+                "id": "reply_002_1",
+                "authorName": "Vedifai Support Team",
+                "authorRole": "Admin",
+                "authorImage": "https://i.pravatar.cc/150?img=11",
+                "timestamp": "2023-11-24T15:30:00Z",
+                "content": "Hello Neha! Great question. Smart Match uses a weighted combination. First, it filters out mentors who do not teach the exact skills you're looking for. Then, it ranks the remaining mentors based on their verified reviews, and finally, applies a location/availability boost so you see active educators in your timezone first!",
+                "upvotes": 65
+            }
+        ]
+    },
+    {
+        "id": "post_003",
+        "authorName": "Vikram Desai",
+        "authorRole": "Aspiring Data Scientist",
+        "authorImage": "https://i.pravatar.cc/150?img=12",
+        "timestamp": "2023-11-25T08:10:00Z",
+        "title": "Study Group for Machine Learning Bootcamp?",
+        "content": "Is anyone here currently enrolled in the 12-week Machine Learning bootcamp? I'm looking to form a weekend study group on Discord to go over the weekly assignments.",
+        "tags": [
+            "Study Group",
+            "Machine Learning",
+            "Networking"
+        ],
+        "upvotes": 25,
+        "repliesCount": 0,
+        "replies": []
+    },
+    {
+        "id": "post_004",
+        "authorName": "Kavya Reddy",
+        "authorRole": "High School Student",
+        "authorImage": "https://i.pravatar.cc/150?img=5",
+        "timestamp": "2023-11-26T18:05:00Z",
+        "title": "Tips for managing anxiety before 1-on-1 tutoring sessions?",
+        "content": "I get really nervous before my live video sessions with my physics mentor. Does anyone have routines or tips they use to calm down and focus before joining the call?",
+        "tags": [
+            "Advice",
+            "Mental Health",
+            "Tutoring"
+        ],
+        "upvotes": 210,
+        "repliesCount": 2,
+        "replies": [
+            {
+                "id": "reply_004_1",
+                "authorName": "Dr. Ananya Rao",
+                "authorRole": "Education Psychologist",
+                "authorImage": "https://i.pravatar.cc/150?img=9",
+                "timestamp": "2023-11-26T19:00:00Z",
+                "content": "This is completely normal, Kavya! Try keeping a 'session notebook'. Write down 3 specific questions you want to ask before the call starts. Having a concrete plan helps shift your brain away from anxiety and into problem-solving mode.",
+                "upvotes": 145
+            },
+            {
+                "id": "reply_004_2",
+                "authorName": "Rohan Mehta",
+                "authorRole": "Peer Tutor",
+                "authorImage": "https://i.pravatar.cc/150?img=33",
+                "timestamp": "2023-11-27T10:15:00Z",
+                "content": "I always join the waiting room 5 minutes early and just listen to a favorite song. Also, remember that your mentor is there to help you, not judge you!",
+                "upvotes": 89
+            }
+        ]
+    }
+]
