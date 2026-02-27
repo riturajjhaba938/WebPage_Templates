@@ -319,11 +319,11 @@ const CoursesPage = ({ onCompareNow, onBack }) => {
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="bg-transparent text-sm font-bold focus:outline-none cursor-pointer text-[#022c22] dark:text-white py-2 pr-4 appearance-none hover:text-brand-lime transition-colors"
+                                    className="bg-transparent text-sm font-bold focus:outline-none cursor-pointer text-[#022c22] dark:text-white py-2 pr-4 appearance-none hover:text-brand-lime transition-colors [&>*]:bg-white [&>*]:text-black dark:[&>*]:bg-gray-800 dark:[&>*]:text-white"
                                 >
-                                    <option className="bg-white text-gray-900 dark:bg-gray-800 dark:text-white">Most Trending</option>
-                                    <option className="bg-white text-gray-900 dark:bg-gray-800 dark:text-white">Price: Low to High</option>
-                                    <option className="bg-white text-gray-900 dark:bg-gray-800 dark:text-white">Highest Rated</option>
+                                    <option value="Most Trending">Most Trending</option>
+                                    <option value="Price: Low to High">Price: Low to High</option>
+                                    <option value="Highest Rated">Highest Rated</option>
                                 </select>
                             </div>
                         </div>
