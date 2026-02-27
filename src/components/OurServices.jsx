@@ -43,16 +43,16 @@ const services = [
 const OurServices = ({ onNavigate }) => {
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-12 cursor-default">
-            <div className="bg-gradient-to-br from-[#bef264] to-[#a3e635] shadow-2xl rounded-[2.5rem] p-8 md:p-14 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-[#bef264] to-[#a3e635] shadow-2xl rounded-3xl md:rounded-[2.5rem] p-6 sm:p-8 md:p-14 relative overflow-hidden">
                 {/* Background Decoration */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-                <div className="absolute bottom-0 left-0 w-64 h-64 bg-black opacity-5 rounded-full blur-3xl transform -translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-40 h-40 md:w-64 md:h-64 bg-white opacity-10 rounded-full blur-2xl md:blur-3xl transform translate-x-1/3 -translate-y-1/3 pointer-events-none"></div>
+                <div className="absolute bottom-0 left-0 w-40 h-40 md:w-64 md:h-64 bg-black opacity-5 rounded-full blur-2xl md:blur-3xl transform -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
                 <div className="relative z-10">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-10">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-10 space-y-4 md:space-y-0">
                         <div>
-                            <h2 className="text-xl font-bold text-[#4d7c0f] dark:text-[#65a30d] uppercase tracking-wider mb-2 transition-colors duration-300">Features</h2>
-                            <h3 className="text-3xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight transition-colors duration-300">
+                            <h2 className="text-sm md:text-xl font-bold text-[#4d7c0f] dark:text-[#65a30d] uppercase tracking-wider mb-1 md:mb-2 transition-colors duration-300">Features</h2>
+                            <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight transition-colors duration-300">
                                 Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#022c22] to-[#047857] dark:from-[#bef264] dark:to-[#4ade80]">Services</span>
                             </h3>
                         </div>

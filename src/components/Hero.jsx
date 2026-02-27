@@ -221,8 +221,8 @@ const Hero = () => {
                     </h2>
                 </div>
 
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-gray-900 dark:text-white uppercase tracking-tighter leading-[1.1] max-w-5xl mx-auto transition-colors duration-300">
-                    Pahle <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-[#84cc16] dark:from-[#bef264] dark:to-[#4ade80]">Vedifai</span> Karo <br className="hidden md:block" /> Fir Padhai Karo
+                <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-gray-900 dark:text-white uppercase tracking-tighter leading-[1.1] max-w-5xl mx-auto transition-colors duration-300">
+                    Find the Right <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-[#84cc16] dark:from-[#bef264] dark:to-[#4ade80]">Mentor</span>, <br className="hidden md:block" /> Anytime, Anywhere
                 </h1>
 
                 <p className="mt-6 text-gray-500 dark:text-gray-400 max-w-2xl mx-auto text-lg md:text-xl font-medium transition-colors duration-300">

@@ -1,19 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import vedifaiLogo from '../assets/vedifai-logo.jpg';
 import { Menu, X, User, Bell, Sun, Moon } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const PREDEFINED_TEXTS = [
+    "VEDIFAI",
+    "India's On-Demand Personalised Learning Platform for Every Student"
+];
 
 const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = () => { }, onSupportClick = () => { } }) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [textIndex, setTextIndex] = useState(0);
+
+    // Rotate text every 6 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTextIndex((prev) => (prev + 1) % PREDEFINED_TEXTS.length);
+        }, 6000);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-sm border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
 
-                    {/* Logo with New Image and Brand Name */}
-                    <div className="flex items-center gap-2 cursor-pointer" onClick={onHomeClick}>
-                        <img src={vedifaiLogo} alt="Vedifai Logo" className="h-[50px] w-auto object-contain rounded-lg" />
-                        <span className="text-xl font-bold tracking-tighter text-brand dark:text-white transition-colors">VEDIFAI</span>
+                    {/* Logo with New Image and Animated Brand Name */}
+                    <div className="flex items-center gap-2 cursor-pointer max-w-[50%] md:max-w-[40%] overflow-hidden" onClick={onHomeClick}>
+                        <img src={vedifaiLogo} alt="Vedifai Logo" className="h-[40px] md:h-[50px] w-auto object-contain rounded-lg flex-shrink-0" />
+                        <div className="h-[50px] flex items-center relative flex-1 overflow-hidden">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={textIndex}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.5 }}
+                                    className="absolute left-0 w-full"
+                                >
+                                    {/* Typing Effect wrapper manually splitting child chars */}
+                                    <span className={`font-bold tracking-tight text-brand dark:text-white transition-colors ${textIndex === 0 ? 'text-xl md:text-2xl uppercase tracking-tighter' : 'text-[10px] md:text-sm leading-tight'}`}>
+                                        {PREDEFINED_TEXTS[textIndex].split('').map((char, index) => (
+                                            <motion.span
+                                                key={`${textIndex}-${index}`}
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ duration: 0.05, delay: index * 0.03 }}
+                                            >
+                                                {char}
+                                            </motion.span>
+                                        ))}
+                                    </span>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
                     </div>
 
                     {/* Desktop Menu */}
