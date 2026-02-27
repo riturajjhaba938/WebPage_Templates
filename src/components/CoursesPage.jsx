@@ -14,6 +14,9 @@ const CoursesPage = ({ onCompareNow, onBack }) => {
     const [selectedFormat, setSelectedFormat] = useState('All');
     const [sortBy, setSortBy] = useState('Most Trending');
 
+    // Mobile specific UI state
+    const [showMobileFilters, setShowMobileFilters] = useState(false);
+
     // New State for comparison
     const [selectedForCompare, setSelectedForCompare] = useState([]);
 
@@ -130,15 +133,34 @@ const CoursesPage = ({ onCompareNow, onBack }) => {
                 {/* Mobile Filter Toggle (Visible only on small screens) */}
                 <div className="md:hidden p-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 flex justify-between items-center transition-colors duration-300 shrink-0">
                     <h2 className="font-bold text-gray-800 dark:text-white">Filters & Search</h2>
-                    <button className="flex items-center gap-2 text-sm bg-gray-100 dark:bg-gray-700 px-3 py-1.5 rounded-lg text-gray-700 dark:text-gray-300 transition-colors">
+                    <button
+                        onClick={() => setShowMobileFilters(true)}
+                        className="flex items-center gap-2 text-sm bg-gray-100 dark:bg-gray-700 px-3 py-1.5 rounded-lg text-gray-700 dark:text-gray-300 transition-colors cursor-pointer"
+                    >
                         <SlidersHorizontal size={16} /> Show
                     </button>
                 </div>
 
+                {/* Mobile Backdrop Overlay */}
+                <AnimatePresence>
+                    {showMobileFilters && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setShowMobileFilters(false)}
+                            className="fixed inset-0 bg-black/50 z-40 md:hidden backdrop-blur-sm"
+                        />
+                    )}
+                </AnimatePresence>
+
                 {/* Left Sidebar (Filters) */}
-                <div className="w-full md:w-72 bg-white dark:bg-gray-800 p-6 border-r border-gray-200 dark:border-gray-700 overflow-y-auto hidden md:block shrink-0 transition-colors duration-300 shadow-sm z-10">
-                    <div className="flex items-center gap-2 font-bold mb-6 text-[#022c22] dark:text-gray-200 uppercase tracking-wide">
-                        <SlidersHorizontal size={18} className="text-brand-lime" /> Filter Library
+                <div className={`fixed inset-y-0 left-0 z-50 w-[85%] max-w-[320px] transform ${showMobileFilters ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0 md:w-72 bg-white dark:bg-gray-800 p-6 border-r border-gray-200 dark:border-gray-700 overflow-y-auto transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none shrink-0`}>
+                    <div className="flex items-center justify-between font-bold mb-6 text-[#022c22] dark:text-gray-200 uppercase tracking-wide">
+                        <div className="flex items-center gap-2"><SlidersHorizontal size={18} className="text-brand-lime" /> Filter Library</div>
+                        <button onClick={() => setShowMobileFilters(false)} className="md:hidden p-2 -mr-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer text-gray-500">
+                            <X size={20} />
+                        </button>
                     </div>
 
                     {/* Search */}
@@ -270,7 +292,7 @@ const CoursesPage = ({ onCompareNow, onBack }) => {
                     {/* Clear Filters */}
                     <button
                         onClick={clearAllFilters}
-                        className="w-full py-3 mt-4 text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all"
+                        className="w-full py-3 mt-4 text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all mb-8 md:mb-0"
                     >
                         Reset All Filters
                     </button>

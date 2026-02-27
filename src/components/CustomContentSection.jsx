@@ -76,7 +76,7 @@ const CustomContentSection = () => {
     };
 
     return (
-        <section ref={sectionRef} className="w-full py-20 bg-gray-50 dark:bg-gray-800/50 rounded-[3rem] my-12 relative overflow-hidden shadow-inner dark:shadow-none transition-colors duration-300">
+        <section ref={sectionRef} className="w-full py-12 md:py-20 bg-gray-50 dark:bg-gray-800/50 rounded-3xl md:rounded-[3rem] my-8 md:my-12 relative overflow-hidden shadow-inner dark:shadow-none transition-colors duration-300">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#10b981 1px, transparent 1px)', backgroundSize: '32px 32px' }}></div>
 
