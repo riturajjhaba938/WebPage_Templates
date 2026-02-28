@@ -33,7 +33,12 @@ const allTopics = Object.values(categories).flat();
 
 const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedSubjects, setSelectedSubjects] = useState(initialSubject ? [initialSubject] : allTopics);
+    const [selectedSubjects, setSelectedSubjects] = useState(() => {
+        if (initialSubject === 'All Values') {
+            return categories.VALUES;
+        }
+        return initialSubject ? [initialSubject] : allTopics;
+    });
     const [maxPrice, setMaxPrice] = useState(50000);
     const [minRating, setMinRating] = useState(0);
     const [selectedLevel, setSelectedLevel] = useState('All');

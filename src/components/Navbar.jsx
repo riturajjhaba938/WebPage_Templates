@@ -38,10 +38,7 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
             "CRITICAL THINKING",
             "ADDICTION MANAGMENT",
             "ANGER MANAGMENT",
-            "PERSONALITY DEVELOPMENT",
-            "LEADERSHIP",
-            "REWIRING YOUR SELF",
-            "CREATIVE DESIGN"
+            "Explore..."
         ]
     };
 
@@ -174,9 +171,16 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                                                             <button
                                                                 onClick={(e) => {
                                                                     e.stopPropagation();
-                                                                    onCoursesClick(topic);
+                                                                    if (topic === "Explore...") {
+                                                                        onCoursesClick("All Values");
+                                                                    } else {
+                                                                        onCoursesClick(topic);
+                                                                    }
                                                                 }}
-                                                                className="text-left w-full text-xs font-bold text-gray-500 dark:text-gray-400 hover:text-brand-lime dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50 px-3 py-2 rounded-lg transition-colors"
+                                                                className={`text-left w-full text-xs font-bold px-3 py-2 rounded-lg transition-colors ${topic === "Explore..."
+                                                                    ? "text-[#84cc16] hover:text-[#064e3b] dark:text-[#a3e635] dark:hover:text-white bg-[#f0fdf4] dark:bg-[#022c22] hover:bg-[#bef264] dark:hover:bg-[#84cc16]"
+                                                                    : "text-gray-500 dark:text-gray-400 hover:text-brand-lime dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                                                                    }`}
                                                             >
                                                                 {topic}
                                                             </button>
@@ -298,10 +302,10 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                             </AnimatePresence>
                         </div>
 
-                        {/* User Icon */}
-                        <button className="hidden sm:block p-1.5 md:p-2 rounded-full bg-[#bef264] text-[#064e3b] hover:bg-[#a3e635] transition-colors">
+                        {/* User Icon (Anchor) */}
+                        <a href="#" className="hidden sm:flex p-1.5 md:p-2 rounded-full bg-[#bef264] text-[#064e3b] hover:bg-[#a3e635] transition-colors items-center justify-center">
                             <User size={18} className="md:w-5 md:h-5" />
-                        </button>
+                        </a>
 
                         {/* Mobile Menu Button Container */}
                         <div className="md:hidden flex items-center ml-1">
