@@ -95,12 +95,6 @@ const OurServices = ({ onNavigate }) => {
                     </div>
                 </div>
             </div>
-
-            <div className="flex justify-center mt-12 mb-8">
-                <a href="https://example.com/about-us" target="_blank" rel="noopener noreferrer" className="inline-block bg-white dark:bg-gray-800 text-[#022c22] dark:text-white border-2 border-[#022c22] dark:border-gray-700 px-12 py-4 rounded-full font-black text-lg shadow-sm hover:bg-[#022c22] dark:hover:bg-[#bef264] hover:text-white dark:hover:text-gray-900 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer">
-                    About Us
-                </a>
-            </div>
         </div>
     );
 };

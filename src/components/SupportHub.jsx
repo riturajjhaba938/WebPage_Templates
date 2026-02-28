@@ -195,19 +195,6 @@ const SupportHub = ({ onOpenChat }) => {
 
                 </div>
             </div>
-
-            {/* Simple Bottom Banner mimicking design */}
-            <div className="mt-24 h-24 bg-[#8cc63f] w-full flex items-center justify-center">
-                <a
-                    href="https://example.com/about-us"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-[#022c22] text-white font-bold px-8 py-3 rounded-full hover:bg-[#064e3b] transition-colors shadow-lg text-sm tracking-wide"
-                >
-                    About Us
-                </a>
-            </div>
-
         </div>
     );
 };

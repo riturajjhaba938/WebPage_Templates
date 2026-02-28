@@ -30,7 +30,6 @@ const Footer = ({ onNavigate }) => {
                         <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
                         <ul className="space-y-3 text-sm text-gray-400">
                             <li><button onClick={() => onNavigate && onNavigate('home')} className="hover:text-brand transition-colors text-left w-full">Home</button></li>
-                            <li><a href="https://example.com/about" target="_blank" rel="noopener noreferrer" className="hover:text-brand transition-colors">About Us</a></li>
                             <li><button onClick={() => onNavigate && onNavigate('courses')} className="hover:text-brand transition-colors text-left w-full">Courses</button></li>
                             <li><button onClick={() => onNavigate && onNavigate('home')} className="hover:text-brand transition-colors text-left w-full">Mentors</button></li>
                             <li><a href="https://example.com/contact" target="_blank" rel="noopener noreferrer" className="hover:text-brand transition-colors">Contact</a></li>
