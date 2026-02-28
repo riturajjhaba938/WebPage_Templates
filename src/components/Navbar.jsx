@@ -8,7 +8,7 @@ const PREDEFINED_TEXTS = [
     "India's On-Demand Personalised Learning Platform for Every Student"
 ];
 
-const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = () => { }, onSupportClick = () => { } }) => {
+const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = () => { }, onSupportClick = () => { }, onMentorsClick = () => { } }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
     const [textIndex, setTextIndex] = useState(0);
