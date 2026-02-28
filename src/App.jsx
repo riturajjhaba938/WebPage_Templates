@@ -10,6 +10,7 @@ import ScrollMascot from './components/ScrollMascot';
 import CourseComparison from './components/CourseComparison';
 import CoursesPage from './components/CoursesPage';
 import MentorProfile from './components/MentorProfile';
+import MentorsPage from './components/MentorsPage';
 import SupportHub from './components/SupportHub';
 import ChatbotWidget from './components/ChatbotWidget';
 import IntroAnimation from './components/IntroAnimation';
@@ -19,7 +20,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState(() => {
     // Check initial URL hash first
     const hash = typeof window !== 'undefined' ? window.location.hash.replace('#', '') : '';
-    if (hash && ['home', 'courses', 'comparison', 'support', 'mentorProfile'].includes(hash)) {
+    if (hash && ['home', 'courses', 'comparison', 'support', 'mentorProfile', 'mentors'].includes(hash)) {
       return hash;
     }
     // Check local session storage for the saved page, default to 'home'
@@ -151,6 +152,7 @@ function App() {
         onHomeClick={() => navigateTo('home')}
         onCoursesClick={(subtopic) => navigateTo('courses', subtopic)}
         onSupportClick={() => navigateTo('support')}
+        onMentorsClick={() => navigateTo('mentors')}
       />
 
       {currentPage === 'home' && <ScrollMascot />}
@@ -176,10 +178,13 @@ function App() {
           <CoursesPage
             initialSubject={typeof window !== 'undefined' && window.history.state?.data ? window.history.state.data : null}
             onBack={() => navigateTo('home')}
+            onNavigate={navigateTo}
             onCompareNow={(ids) => navigateTo('comparison', ids)}
           />
         ) : currentPage === 'mentorProfile' ? (
           <MentorProfile mentorId={selectedMentorId} onBack={() => navigateTo('home')} onCourseClick={() => navigateTo('courses')} />
+        ) : currentPage === 'mentors' ? (
+          <MentorsPage onNavigate={navigateTo} onBack={() => navigateTo('home')} />
         ) : currentPage === 'support' ? (
           <SupportHub onOpenChat={() => setIsChatOpen(true)} />
         ) : (

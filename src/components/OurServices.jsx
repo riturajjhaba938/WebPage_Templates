@@ -56,9 +56,9 @@ const OurServices = ({ onNavigate }) => {
                                 Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#022c22] to-[#047857] dark:from-[#bef264] dark:to-[#4ade80]">Services</span>
                             </h3>
                         </div>
-                        <a href="https://example.com/all-services" target="_blank" rel="noopener noreferrer" className="hidden md:flex items-center gap-2 bg-[#022c22] dark:bg-gray-900/80 text-white dark:text-[#bef264] px-6 py-3 rounded-full font-bold hover:bg-[#064e3b] dark:hover:bg-gray-800 transition-all duration-300 shadow-md group border border-transparent dark:border-[#bef264]/20 cursor-pointer">
+                        <button onClick={() => onNavigate && onNavigate('mentors')} className="hidden md:flex items-center gap-2 bg-[#022c22] dark:bg-gray-900/80 text-white dark:text-[#bef264] px-6 py-3 rounded-full font-bold hover:bg-[#064e3b] dark:hover:bg-gray-800 transition-all duration-300 shadow-md group border border-transparent dark:border-[#bef264]/20 cursor-pointer">
                             View All <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </a>
+                        </button>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -89,9 +89,9 @@ const OurServices = ({ onNavigate }) => {
                     </div>
 
                     <div className="mt-10 flex justify-center md:hidden">
-                        <a href="https://example.com/all-services" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 bg-[#022c22] dark:bg-gray-900/80 text-white dark:text-[#bef264] px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#064e3b] dark:hover:bg-gray-800 border border-transparent dark:border-[#bef264]/20 transition-all duration-300 w-full justify-center cursor-pointer">
+                        <button onClick={() => onNavigate && onNavigate('mentors')} className="flex items-center gap-2 bg-[#022c22] dark:bg-gray-900/80 text-white dark:text-[#bef264] px-8 py-3 rounded-full font-bold shadow-lg hover:bg-[#064e3b] dark:hover:bg-gray-800 border border-transparent dark:border-[#bef264]/20 transition-all duration-300 w-full justify-center cursor-pointer">
                             View All <ArrowRight size={18} />
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

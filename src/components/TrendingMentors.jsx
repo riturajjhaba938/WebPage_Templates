@@ -56,7 +56,7 @@ const TrendingMentors = ({ onNavigate }) => {
                         ))}
 
                         {/* 'More' Card */}
-                        <div className="w-32 h-44 md:w-36 md:h-48 bg-white/10 rounded-xl border-2 border-dashed border-white/20 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-all group">
+                        <div onClick={() => onNavigate && onNavigate('mentors')} className="w-32 h-44 md:w-36 md:h-48 bg-white/10 rounded-xl border-2 border-dashed border-white/20 flex items-center justify-center cursor-pointer hover:bg-white/20 transition-all group">
                             <span className="text-white/70 font-bold text-sm group-hover:text-white group-hover:scale-110 transition-all">View All</span>
                         </div>
                     </div>

@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Search, X, CheckCircle, SlidersHorizontal, ChevronLeft, ChevronRight, Star, Filter, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import coursesData from '../data/coursesData.json';
+import mentorsData from '../data/mentorsData.json';
 
 const categories = {
     KNOWLEDGE: [
@@ -30,7 +31,7 @@ const categories = {
 
 const allTopics = Object.values(categories).flat();
 
-const CoursesPage = ({ initialSubject, onCompareNow, onBack }) => {
+const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedSubjects, setSelectedSubjects] = useState(initialSubject ? [initialSubject] : allTopics);
     const [maxPrice, setMaxPrice] = useState(50000);
@@ -44,6 +45,14 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack }) => {
 
     // New State for comparison
     const [selectedForCompare, setSelectedForCompare] = useState([]);
+
+    // Helper to extract mentor ID for routing
+    const getMentorIdByName = (mentorString) => {
+        if (!mentorString) return null;
+        const cleanName = mentorString.replace(/^By\s+/i, '').trim();
+        const mentor = mentorsData.find(m => m.name.toLowerCase() === cleanName.toLowerCase());
+        return mentor ? mentor.id : null;
+    };
 
     // Filter Logic
     const filteredCourses = useMemo(() => {
@@ -427,11 +436,17 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack }) => {
                                                 <h3 className="font-black text-xl text-[#022c22] dark:text-white mb-2 leading-tight group-hover:text-brand-lime transition-colors">
                                                     {course.title}
                                                 </h3>
-                                                <div className="flex items-center gap-2 mb-4">
-                                                    <div className="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex shrink-0 border border-gray-300 dark:border-gray-600 overflow-hidden">
-                                                        {course.mentorImage ? <img src={course.mentorImage} alt="mentor" className="w-full h-full object-cover" /> : null}
+                                                <div
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        if (onNavigate) onNavigate('mentorProfile', getMentorIdByName(course.mentor));
+                                                    }}
+                                                    className="flex items-center gap-2 mb-4 cursor-pointer group/mentor hover:bg-gray-50 dark:hover:bg-gray-700/50 p-1.5 -ml-1.5 rounded-lg transition-colors inline-flex"
+                                                >
+                                                    <div className="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex shrink-0 border border-gray-300 dark:border-gray-600 overflow-hidden group-hover/mentor:border-brand-lime transition-colors">
+                                                        {course.mentorImage ? <img src={course.mentorImage} alt="mentor" className="w-full h-full object-cover group-hover/mentor:scale-110 transition-transform" /> : null}
                                                     </div>
-                                                    <p className="text-gray-600 dark:text-gray-400 text-sm font-medium transition-colors">
+                                                    <p className="text-gray-600 dark:text-gray-400 text-sm font-medium transition-colors group-hover/mentor:text-brand-lime dark:group-hover/mentor:text-brand-lime">
                                                         {course.mentor}
                                                     </p>
                                                 </div>
