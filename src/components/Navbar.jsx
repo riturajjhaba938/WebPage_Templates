@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import vedifaiLogo from '../assets/vedifai-logo.jpg';
 import { Menu, X, User, Bell, Sun, Moon, ChevronDown, Tag, Flame, Star, Clock, Rocket } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -17,6 +17,8 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
     // Notifications State
     const [currentNotification, setCurrentNotification] = useState(notificationsData[0]);
     const [showNotification, setShowNotification] = useState(false);
+    const [isNotificationMenuOpen, setIsNotificationMenuOpen] = useState(false);
+    const notificationMenuRef = useRef(null);
 
     const categories = {
         KNOWLEDGE: [
@@ -53,6 +55,11 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
 
     // Notification Loop
     useEffect(() => {
+        if (isNotificationMenuOpen) {
+            setShowNotification(false);
+            return;
+        }
+
         const notifyInterval = setInterval(() => {
             // Pick random notification
             const randomNotif = notificationsData[Math.floor(Math.random() * notificationsData.length)];
@@ -66,7 +73,24 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
         }, 20000); // Trigger every 20 seconds
 
         return () => clearInterval(notifyInterval);
-    }, []);
+    }, [isNotificationMenuOpen]);
+
+    // Handle outside click to close notification menu
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (notificationMenuRef.current && !notificationMenuRef.current.contains(event.target)) {
+                setIsNotificationMenuOpen(false);
+            }
+        };
+
+        if (isNotificationMenuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isNotificationMenuOpen]);
 
     const getNotificationIcon = (type) => {
         switch (type) {
@@ -180,16 +204,19 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                         </button>
 
                         {/* Notifications Icon */}
-                        <div className="relative">
-                            <button className="ml-2 p-2 rounded-full relative bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-accent dark:hover:text-[#bef264] transition-colors relative z-20">
+                        <div className="relative" ref={notificationMenuRef}>
+                            <button
+                                onClick={() => setIsNotificationMenuOpen(!isNotificationMenuOpen)}
+                                className="ml-2 p-2 rounded-full relative bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-accent dark:hover:text-[#bef264] transition-colors relative z-20"
+                            >
                                 <Bell size={20} />
                                 {/* Notification Badge */}
                                 <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white dark:border-gray-900"></span>
                             </button>
 
-                            {/* Animated Notification Popup */}
+                            {/* Animated Auto-Notification Popup */}
                             <AnimatePresence>
-                                {showNotification && currentNotification && (
+                                {showNotification && currentNotification && !isNotificationMenuOpen && (
                                     <motion.a
                                         href={currentNotification.link}
                                         target="_blank"
@@ -215,6 +242,55 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                                             <span className="text-xs font-bold text-brand-lime tracking-widest hidden sm:block">GO</span>
                                         </div>
                                     </motion.a>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Manual Notification Dropdown Menu */}
+                            <AnimatePresence>
+                                {isNotificationMenuOpen && (
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                                        exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                                        transition={{ duration: 0.2 }}
+                                        className="absolute top-14 right-0 w-80 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl shadow-2xl z-[60] overflow-hidden"
+                                    >
+                                        <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/20">
+                                            <h3 className="font-bold text-gray-900 dark:text-white">Notifications</h3>
+                                        </div>
+                                        <div className="max-h-96 overflow-y-auto">
+                                            {notificationsData.map((notification) => (
+                                                <a
+                                                    key={notification.id}
+                                                    href={notification.link}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="flex gap-4 p-4 border-b border-gray-50 dark:border-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group"
+                                                    onClick={() => setIsNotificationMenuOpen(false)}
+                                                >
+                                                    <div className="mt-1 bg-gray-100 dark:bg-gray-800 w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+                                                        {getNotificationIcon(notification.iconType)}
+                                                    </div>
+                                                    <div>
+                                                        <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-1 group-hover:text-brand-lime transition-colors leading-tight">
+                                                            {notification.title}
+                                                        </h4>
+                                                        <p className="text-xs text-gray-500 dark:text-gray-400 leading-snug">
+                                                            {notification.message}
+                                                        </p>
+                                                    </div>
+                                                </a>
+                                            ))}
+                                        </div>
+                                        <div className="p-3 text-center bg-gray-50 dark:bg-gray-800/30">
+                                            <button
+                                                className="text-xs font-bold text-brand-lime hover:text-[#064e3b] dark:hover:text-white transition-colors"
+                                                onClick={() => setIsNotificationMenuOpen(false)}
+                                            >
+                                                Mark all as read
+                                            </button>
+                                        </div>
+                                    </motion.div>
                                 )}
                             </AnimatePresence>
                         </div>
