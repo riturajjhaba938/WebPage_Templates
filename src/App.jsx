@@ -149,7 +149,7 @@ function App() {
         theme={theme}
         toggleTheme={toggleTheme}
         onHomeClick={() => navigateTo('home')}
-        onCoursesClick={() => navigateTo('courses')}
+        onCoursesClick={(subtopic) => navigateTo('courses', subtopic)}
         onSupportClick={() => navigateTo('support')}
       />
 
@@ -173,7 +173,11 @@ function App() {
             </div>
           </>
         ) : currentPage === 'courses' ? (
-          <CoursesPage onBack={() => navigateTo('home')} onCompareNow={(ids) => navigateTo('comparison', ids)} />
+          <CoursesPage
+            initialSubject={typeof window !== 'undefined' && window.history.state?.data ? window.history.state.data : null}
+            onBack={() => navigateTo('home')}
+            onCompareNow={(ids) => navigateTo('comparison', ids)}
+          />
         ) : currentPage === 'mentorProfile' ? (
           <MentorProfile mentorId={selectedMentorId} onBack={() => navigateTo('home')} onCourseClick={() => navigateTo('courses')} />
         ) : currentPage === 'support' ? (

@@ -3,11 +3,36 @@ import { Search, X, CheckCircle, SlidersHorizontal, ChevronLeft, ChevronRight, S
 import { motion, AnimatePresence } from 'framer-motion';
 import coursesData from '../data/coursesData.json';
 
-const allSubjects = [...new Set(coursesData.map(c => c.subject))];
+const categories = {
+    KNOWLEDGE: [
+        "ACADEMIC K 12",
+        "JEE/NEET/GATE",
+        "UPSC/STATE/PCS",
+        "SAT/CAT/CLAT"
+    ],
+    SKILL: [
+        "AI & MACHINE LEARNING",
+        "DATA SCI & ANALYST",
+        "SOFTWARE DEV.",
+        "90 DAYS JOB READY"
+    ],
+    VALUES: [
+        "CIVIL SENS",
+        "CRITICAL THINKING",
+        "ADDICTION MANAGMENT",
+        "ANGER MANAGMENT",
+        "PERSONALITY DEVELOPMENT",
+        "LEADERSHIP",
+        "REWIRING YOUR SELF",
+        "CREATIVE DESIGN"
+    ]
+};
 
-const CoursesPage = ({ onCompareNow, onBack }) => {
+const allTopics = Object.values(categories).flat();
+
+const CoursesPage = ({ initialSubject, onCompareNow, onBack }) => {
     const [searchQuery, setSearchQuery] = useState('');
-    const [selectedSubjects, setSelectedSubjects] = useState(allSubjects);
+    const [selectedSubjects, setSelectedSubjects] = useState(initialSubject ? [initialSubject] : allTopics);
     const [maxPrice, setMaxPrice] = useState(50000);
     const [minRating, setMinRating] = useState(0);
     const [selectedLevel, setSelectedLevel] = useState('All');
@@ -60,7 +85,7 @@ const CoursesPage = ({ onCompareNow, onBack }) => {
 
     const clearAllFilters = () => {
         setSearchQuery('');
-        setSelectedSubjects(allSubjects);
+        setSelectedSubjects(allTopics);
         setMaxPrice(50000);
         setMinRating(0);
         setSelectedLevel('All');
@@ -175,26 +200,37 @@ const CoursesPage = ({ onCompareNow, onBack }) => {
                         />
                     </div>
 
-                    {/* Subjects */}
+                    {/* Categories and Subjects */}
                     <div className="mb-8">
                         <div className="flex items-center justify-between mb-4">
-                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider">CATEGORY</h4>
+                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider">CATERGORIES</h4>
                             <div className="h-px bg-gray-200 dark:bg-gray-700 flex-1 ml-3"></div>
                         </div>
-                        <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                            {allSubjects.map(subject => (
-                                <label key={subject} className="flex items-center gap-3 cursor-pointer group">
-                                    <div className="relative flex items-center justify-center">
-                                        <input
-                                            type="checkbox"
-                                            className="peer w-5 h-5 rounded border-2 border-gray-300 dark:border-gray-600 outline-none appearance-none checked:bg-brand-lime checked:border-brand-lime transition-all cursor-pointer"
-                                            checked={selectedSubjects.includes(subject)}
-                                            onChange={() => handleSubjectToggle(subject)}
-                                        />
-                                        <CheckCircle size={14} className="absolute text-[#022c22] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" />
+                        <div className="space-y-6">
+                            {Object.entries(categories).map(([categoryName, topics]) => (
+                                <div key={categoryName}>
+                                    <h5 className="text-xs font-black text-[#022c22] dark:text-brand-lime mb-3 uppercase tracking-wider">
+                                        {categoryName}
+                                    </h5>
+                                    <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300 pl-2">
+                                        {topics.map(topic => (
+                                            <label key={topic} className="flex items-center gap-3 cursor-pointer group">
+                                                <div className="relative flex items-center justify-center">
+                                                    <input
+                                                        type="checkbox"
+                                                        className="peer w-5 h-5 rounded border-2 border-gray-300 dark:border-gray-600 outline-none appearance-none checked:bg-brand-lime checked:border-brand-lime transition-all cursor-pointer shrink-0"
+                                                        checked={selectedSubjects.includes(topic)}
+                                                        onChange={() => handleSubjectToggle(topic)}
+                                                    />
+                                                    <CheckCircle size={14} className="absolute text-[#022c22] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" />
+                                                </div>
+                                                <span className={`group-hover:text-brand-lime transition-colors font-medium text-xs ${selectedSubjects.includes(topic) && selectedSubjects.length === 1 ? 'text-brand-lime font-bold' : ''}`}>
+                                                    {topic}
+                                                </span>
+                                            </label>
+                                        ))}
                                     </div>
-                                    <span className="group-hover:text-brand-lime transition-colors font-medium">{subject}</span>
-                                </label>
+                                </div>
                             ))}
                         </div>
                     </div>
