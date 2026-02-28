@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const ScrollMascot = () => {
+const ScrollMascot = ({ onChatClick = () => { } }) => {
     const [scrollProgress, setScrollProgress] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
+    const [showHelpBubble, setShowHelpBubble] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -25,6 +27,22 @@ const ScrollMascot = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Periodic Help Bubble Logic
+    useEffect(() => {
+        if (!isVisible) return; // Don't run timer if hiding
+
+        const helpInterval = setInterval(() => {
+            setShowHelpBubble(true);
+
+            // Hide after 5 seconds
+            setTimeout(() => {
+                setShowHelpBubble(false);
+            }, 5000);
+        }, 12000); // Ask every 12 seconds
+
+        return () => clearInterval(helpInterval);
+    }, [isVisible]);
+
     // If we're at the very top, don't show the mascot
     if (!isVisible) return null;
 
@@ -39,14 +57,28 @@ const ScrollMascot = () => {
             style={{ top: verticalPos }}
         >
             <div className="relative group pointer-events-auto">
-                {/* Speech Bubble (visible on hover) */}
-                <div className="absolute right-16 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-[#022c22] dark:text-white text-xs font-bold px-3 py-2 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap hidden sm:block pointer-events-none border border-gray-100 dark:border-gray-700">
-                    Keep exploring!
-                    <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white dark:bg-gray-800 transform rotate-45 border-r border-t border-gray-100 dark:border-gray-700"></div>
-                </div>
+                {/* Speech Bubble (visible periodically or on hover) */}
+                <AnimatePresence>
+                    {showHelpBubble && (
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.8, x: 10 }}
+                            animate={{ opacity: 1, scale: 1, x: 0 }}
+                            exit={{ opacity: 0, scale: 0.8, x: 10 }}
+                            transition={{ type: 'spring', bounce: 0.5 }}
+                            onClick={onChatClick}
+                            className="absolute right-16 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-[#022c22] dark:text-white text-xs font-bold px-3 py-2 rounded-xl shadow-lg whitespace-nowrap hidden sm:block pointer-events-auto border border-brand-lime/50 dark:border-brand-lime/50 cursor-pointer hover:bg-brand-lime/10 dark:hover:bg-brand-lime/10 transition-colors z-50"
+                        >
+                            Need some help?
+                            <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white dark:bg-gray-800 transform rotate-45 border-r border-t border-brand-lime/50 dark:border-brand-lime/50 transition-colors"></div>
+                        </motion.button>
+                    )}
+                </AnimatePresence>
 
                 {/* Mascot Body */}
-                <div className="w-12 h-16 bg-[#bef264] rounded-full flex flex-col items-center justify-center relative shadow-lg border-2 border-[#022c22] transform hover:scale-110 transition-transform cursor-pointer animate-bounce-slow overflow-hidden">
+                <div
+                    onClick={onChatClick}
+                    className="w-12 h-16 bg-[#bef264] rounded-full flex flex-col items-center justify-center relative shadow-[0_10px_20px_-5px_rgba(0,0,0,0.3)] border-2 border-[#022c22] transform hover:scale-110 transition-transform cursor-pointer animate-bounce-slow overflow-hidden"
+                >
 
                     {/* Character Face */}
                     <div className="flex gap-1.5 mt-1 relative z-10">
