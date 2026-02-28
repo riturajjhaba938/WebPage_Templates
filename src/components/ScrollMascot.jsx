@@ -66,7 +66,7 @@ const ScrollMascot = ({ onChatClick = () => { } }) => {
                             exit={{ opacity: 0, scale: 0.8, x: 10 }}
                             transition={{ type: 'spring', bounce: 0.5 }}
                             onClick={onChatClick}
-                            className="absolute right-16 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-[#022c22] dark:text-white text-xs font-bold px-3 py-2 rounded-xl shadow-lg whitespace-nowrap hidden sm:block pointer-events-auto border border-brand-lime/50 dark:border-brand-lime/50 cursor-pointer hover:bg-brand-lime/10 dark:hover:bg-brand-lime/10 transition-colors z-50"
+                            className="absolute right-14 md:right-16 top-1/2 -translate-y-1/2 bg-white dark:bg-gray-800 text-[#022c22] dark:text-white text-xs font-bold px-3 py-2 rounded-xl shadow-lg whitespace-nowrap flex pointer-events-auto border border-brand-lime/50 dark:border-brand-lime/50 cursor-pointer hover:bg-brand-lime/10 dark:hover:bg-brand-lime/10 transition-colors z-[100]"
                         >
                             Need some help?
                             <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white dark:bg-gray-800 transform rotate-45 border-r border-t border-brand-lime/50 dark:border-brand-lime/50 transition-colors"></div>

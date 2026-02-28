@@ -193,25 +193,28 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
 
                             <button onClick={onSupportClick} className="px-4 py-1.5 rounded-md hover:bg-[#84cc16] hover:text-white dark:hover:bg-[#84cc16] text-[#064e3b] dark:text-[#a3e635] font-bold text-xs transition-colors cursor-pointer">SUPPORT</button>
                         </div>
+                    </div>
 
+                    {/* Right-Side Global Actions (Visible on All Devices) */}
+                    <div className="flex items-center gap-1 md:gap-3">
                         {/* Theme Toggle */}
                         <button
                             onClick={toggleTheme}
-                            className="ml-4 p-2 rounded-full relative bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-accent dark:hover:text-[#bef264] transition-colors"
+                            className="p-1.5 md:p-2 rounded-full relative bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-accent dark:hover:text-[#bef264] transition-colors"
                             aria-label="Toggle Dark Mode"
                         >
-                            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                            {theme === 'dark' ? <Sun size={18} className="md:w-5 md:h-5" /> : <Moon size={18} className="md:w-5 md:h-5" />}
                         </button>
 
                         {/* Notifications Icon */}
                         <div className="relative" ref={notificationMenuRef}>
                             <button
                                 onClick={() => setIsNotificationMenuOpen(!isNotificationMenuOpen)}
-                                className="ml-2 p-2 rounded-full relative bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-accent dark:hover:text-[#bef264] transition-colors relative z-20"
+                                className="p-1.5 md:p-2 rounded-full relative bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-accent dark:hover:text-[#bef264] transition-colors relative z-20"
                             >
-                                <Bell size={20} />
+                                <Bell size={18} className="md:w-5 md:h-5" />
                                 {/* Notification Badge */}
-                                <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white dark:border-gray-900"></span>
+                                <span className="absolute top-0.5 right-0.5 md:top-1 md:right-1 w-2 h-2 md:w-2.5 md:h-2.5 bg-red-500 rounded-full border border-white dark:border-gray-900"></span>
                             </button>
 
                             {/* Animated Auto-Notification Popup */}
@@ -225,21 +228,21 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                         exit={{ opacity: 0, y: -10, scale: 0.95 }}
                                         transition={{ duration: 0.3, type: 'spring', bounce: 0.4 }}
-                                        className="absolute top-14 right-0 w-72 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] p-4 flex gap-4 cursor-pointer hover:border-brand-lime/50 dark:hover:border-brand-lime/50 group z-50 transition-colors"
+                                        className="absolute top-12 md:top-14 right-[-40px] md:right-0 w-64 md:w-72 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] p-3 md:p-4 flex gap-3 md:gap-4 cursor-pointer hover:border-brand-lime/50 dark:hover:border-brand-lime/50 group z-[70] transition-colors"
                                     >
-                                        <div className="mt-1 bg-gray-50 dark:bg-gray-800 w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+                                        <div className="mt-1 bg-gray-50 dark:bg-gray-800 w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0">
                                             {getNotificationIcon(currentNotification.iconType)}
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-1 group-hover:text-brand-lime transition-colors leading-tight">
+                                            <h4 className="font-bold text-xs md:text-sm text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-brand-lime transition-colors leading-tight">
                                                 {currentNotification.title}
                                             </h4>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400 leading-snug">
+                                            <p className="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 leading-snug">
                                                 {currentNotification.message}
                                             </p>
                                         </div>
                                         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            <span className="text-xs font-bold text-brand-lime tracking-widest hidden sm:block">GO</span>
+                                            <span className="text-[10px] md:text-xs font-bold text-brand-lime tracking-widest hidden sm:block">GO</span>
                                         </div>
                                     </motion.a>
                                 )}
@@ -253,38 +256,38 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                                         animate={{ opacity: 1, scale: 1, y: 0 }}
                                         exit={{ opacity: 0, scale: 0.95, y: -10 }}
                                         transition={{ duration: 0.2 }}
-                                        className="absolute top-14 right-0 w-80 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl shadow-2xl z-[60] overflow-hidden"
+                                        className="absolute top-12 md:top-14 right-[-40px] md:right-0 w-72 md:w-80 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-xl shadow-2xl z-[70] overflow-hidden"
                                     >
-                                        <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/20">
-                                            <h3 className="font-bold text-gray-900 dark:text-white">Notifications</h3>
+                                        <div className="px-3 md:px-4 py-2 md:py-3 border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/20">
+                                            <h3 className="font-bold text-sm md:text-base text-gray-900 dark:text-white">Notifications</h3>
                                         </div>
-                                        <div className="max-h-96 overflow-y-auto">
+                                        <div className="max-h-80 md:max-h-96 overflow-y-auto custom-scrollbar">
                                             {notificationsData.map((notification) => (
                                                 <a
                                                     key={notification.id}
                                                     href={notification.link}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="flex gap-4 p-4 border-b border-gray-50 dark:border-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group"
+                                                    className="flex gap-3 md:gap-4 p-3 md:p-4 border-b border-gray-50 dark:border-gray-800/50 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors group"
                                                     onClick={() => setIsNotificationMenuOpen(false)}
                                                 >
-                                                    <div className="mt-1 bg-gray-100 dark:bg-gray-800 w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+                                                    <div className="mt-1 bg-gray-100 dark:bg-gray-800 w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center shrink-0">
                                                         {getNotificationIcon(notification.iconType)}
                                                     </div>
                                                     <div>
-                                                        <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-1 group-hover:text-brand-lime transition-colors leading-tight">
+                                                        <h4 className="font-bold text-xs md:text-sm text-gray-900 dark:text-white mb-0.5 md:mb-1 group-hover:text-brand-lime transition-colors leading-tight">
                                                             {notification.title}
                                                         </h4>
-                                                        <p className="text-xs text-gray-500 dark:text-gray-400 leading-snug">
+                                                        <p className="text-[10px] md:text-xs text-gray-500 dark:text-gray-400 leading-snug">
                                                             {notification.message}
                                                         </p>
                                                     </div>
                                                 </a>
                                             ))}
                                         </div>
-                                        <div className="p-3 text-center bg-gray-50 dark:bg-gray-800/30">
+                                        <div className="p-2 md:p-3 text-center bg-gray-50 dark:bg-gray-800/30">
                                             <button
-                                                className="text-xs font-bold text-brand-lime hover:text-[#064e3b] dark:hover:text-white transition-colors"
+                                                className="text-[10px] md:text-xs font-bold text-brand-lime hover:text-[#064e3b] dark:hover:text-white transition-colors"
                                                 onClick={() => setIsNotificationMenuOpen(false)}
                                             >
                                                 Mark all as read
@@ -296,23 +299,16 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                         </div>
 
                         {/* User Icon */}
-                        <button className="ml-2 p-2 rounded-full bg-[#bef264] text-[#064e3b] hover:bg-[#a3e635] transition-colors">
-                            <User size={20} />
+                        <button className="hidden sm:block p-1.5 md:p-2 rounded-full bg-[#bef264] text-[#064e3b] hover:bg-[#a3e635] transition-colors">
+                            <User size={18} className="md:w-5 md:h-5" />
                         </button>
-                    </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="md:hidden flex items-center gap-2">
-                        {/* Theme Toggle for Mobile */}
-                        <button
-                            onClick={toggleTheme}
-                            className="p-2 rounded-full text-gray-600 dark:text-gray-300"
-                        >
-                            {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
-                        </button>
-                        <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 dark:text-gray-300">
-                            {isOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
+                        {/* Mobile Menu Button Container */}
+                        <div className="md:hidden flex items-center ml-1">
+                            <button onClick={() => setIsOpen(!isOpen)} className="text-gray-700 dark:text-gray-300 p-1">
+                                {isOpen ? <X size={24} /> : <Menu size={24} />}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

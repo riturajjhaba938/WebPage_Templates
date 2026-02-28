@@ -155,7 +155,7 @@ function App() {
         onMentorsClick={() => navigateTo('mentors')}
       />
 
-      {currentPage === 'home' && <ScrollMascot onChatClick={() => setIsChatOpen(true)} />}
+      <ScrollMascot onChatClick={() => setIsChatOpen(true)} />
 
       <main className="flex-grow">
         {currentPage === 'home' ? (
