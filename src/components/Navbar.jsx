@@ -168,34 +168,39 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                                 {/* Mega Menu Dropdown */}
                                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                                     <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 p-6 w-[800px] flex gap-8">
-                                        {Object.entries(categories).map(([category, topics]) => (
-                                            <div key={category} className="flex-1">
-                                                <h3 className="text-sm font-black text-[#022c22] dark:text-brand-lime mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">
-                                                    {category}
-                                                </h3>
-                                                <ul className="space-y-2">
-                                                    {topics.map(topic => (
-                                                        <li key={topic}>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation();
-                                                                    if (topic === "Explore...") {
-                                                                        onCoursesClick("All Values");
-                                                                    } else {
-                                                                        onCoursesClick(topic);
-                                                                    }
-                                                                }}
-                                                                className={`text-left w-full text-xs font-bold px-3 py-2 rounded-lg transition-colors ${topic === "Explore..."
-                                                                    ? "text-[#84cc16] hover:text-[#064e3b] dark:text-[#a3e635] dark:hover:text-white bg-[#f0fdf4] dark:bg-[#022c22] hover:bg-[#bef264] dark:hover:bg-[#84cc16]"
-                                                                    : "text-gray-500 dark:text-gray-400 hover:text-brand-lime dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50"
-                                                                    }`}
-                                                            >
-                                                                {topic}
-                                                            </button>
-                                                        </li>
-                                                    ))}
-                                                </ul>
-                                            </div>
+                                        {Object.entries(categories).map(([category, topics], index, arr) => (
+                                            <React.Fragment key={category}>
+                                                <div className="flex-1">
+                                                    <h3 className="text-sm font-black text-[#022c22] dark:text-brand-lime mb-4 border-b border-gray-100 dark:border-gray-700 pb-2">
+                                                        {category}
+                                                    </h3>
+                                                    <ul className="space-y-2">
+                                                        {topics.map(topic => (
+                                                            <li key={topic}>
+                                                                <button
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        if (topic === "Explore...") {
+                                                                            onCoursesClick("All Values");
+                                                                        } else {
+                                                                            onCoursesClick(topic);
+                                                                        }
+                                                                    }}
+                                                                    className={`text-left w-full text-xs font-bold px-3 py-2 rounded-lg transition-colors ${topic === "Explore..."
+                                                                        ? "text-[#84cc16] hover:text-[#064e3b] dark:text-[#a3e635] dark:hover:text-white bg-[#f0fdf4] dark:bg-[#022c22] hover:bg-[#bef264] dark:hover:bg-[#84cc16]"
+                                                                        : "text-gray-500 dark:text-gray-400 hover:text-brand-lime dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50"
+                                                                        }`}
+                                                                >
+                                                                    {topic}
+                                                                </button>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                                {index < arr.length - 1 && (
+                                                    <div className="w-px bg-gray-200 dark:bg-gray-700/60 hidden md:block"></div>
+                                                )}
+                                            </React.Fragment>
                                         ))}
                                     </div>
                                 </div>
