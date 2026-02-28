@@ -25,15 +25,15 @@ const MentorsPage = ({ onNavigate, onBack }) => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
 
                 {/* Back Button & Actions */}
-                <div className="flex justify-between items-center mb-12 bg-white dark:bg-gray-800 p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-12 bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
                     <button
                         onClick={onBack}
-                        className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-[#0f4d38] dark:hover:text-[#84cc16] font-bold text-sm bg-gray-50 dark:bg-gray-700 px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+                        className="flex items-center justify-center gap-2 text-gray-600 dark:text-gray-300 hover:text-[#0f4d38] dark:hover:text-[#84cc16] font-bold text-sm bg-gray-50 dark:bg-gray-700 px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors w-full sm:w-auto"
                     >
                         <ArrowLeft size={18} />
                         Back to Home
                     </button>
-                    <div className="text-xs font-bold text-gray-500 uppercase tracking-widest bg-gray-50 dark:bg-gray-700 px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <div className="text-[10px] sm:text-xs text-center font-bold text-gray-500 uppercase tracking-widest bg-gray-50 dark:bg-gray-700 px-3 sm:px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 w-full sm:w-auto">
                         Showing {mentorsData.length} Mentors
                     </div>
                 </div>
