@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "title": "🎉 Weekend Special!",
+        "message": "Get 50% Off on all Machine Learning Masterclasses.",
+        "link": "https://example.com/ml-offer",
+        "iconType": "sale"
+    },
+    {
+        "id": 2,
+        "title": "🔥 Trending Now",
+        "message": "Arjun Red's Full Stack Bootcamp is filling up fast!",
+        "link": "https://example.com/arjun-bootcamp",
+        "iconType": "fire"
+    },
+    {
+        "id": 3,
+        "title": "⭐ New Mentor Alert",
+        "message": "Elena Rodriguez from OpenAI just joined us!",
+        "link": "https://example.com/elena",
+        "iconType": "star"
+    },
+    {
+        "id": 4,
+        "title": "⏰ Limited Time",
+        "message": "Enroll in '90 Days Job Ready' before prices increase.",
+        "link": "https://example.com/job-ready",
+        "iconType": "clock"
+    },
+    {
+        "id": 5,
+        "title": "🚀 Career Boost",
+        "message": "Free resume review for all premium members today.",
+        "link": "https://example.com/resume-review",
+        "iconType": "rocket"
+    }
+]

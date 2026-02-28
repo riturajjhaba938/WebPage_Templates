@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import vedifaiLogo from '../assets/vedifai-logo.jpg';
-import { Menu, X, User, Bell, Sun, Moon, ChevronDown } from 'lucide-react';
+import { Menu, X, User, Bell, Sun, Moon, ChevronDown, Tag, Flame, Star, Clock, Rocket } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import notificationsData from '../data/notificationsData.json';
 
 const PREDEFINED_TEXTS = [
     "VEDIFAI",
@@ -12,6 +13,10 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
     const [isOpen, setIsOpen] = useState(false);
     const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
     const [textIndex, setTextIndex] = useState(0);
+
+    // Notifications State
+    const [currentNotification, setCurrentNotification] = useState(notificationsData[0]);
+    const [showNotification, setShowNotification] = useState(false);
 
     const categories = {
         KNOWLEDGE: [
@@ -45,6 +50,34 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
         }, 6000);
         return () => clearInterval(interval);
     }, []);
+
+    // Notification Loop
+    useEffect(() => {
+        const notifyInterval = setInterval(() => {
+            // Pick random notification
+            const randomNotif = notificationsData[Math.floor(Math.random() * notificationsData.length)];
+            setCurrentNotification(randomNotif);
+            setShowNotification(true);
+
+            // Hide after 6 seconds
+            setTimeout(() => {
+                setShowNotification(false);
+            }, 6000);
+        }, 20000); // Trigger every 20 seconds
+
+        return () => clearInterval(notifyInterval);
+    }, []);
+
+    const getNotificationIcon = (type) => {
+        switch (type) {
+            case 'sale': return <Tag size={16} className="text-brand-lime" />;
+            case 'fire': return <Flame size={16} className="text-orange-500" />;
+            case 'star': return <Star size={16} className="text-yellow-400" />;
+            case 'clock': return <Clock size={16} className="text-blue-400" />;
+            case 'rocket': return <Rocket size={16} className="text-purple-400" />;
+            default: return <Bell size={16} className="text-brand-lime" />;
+        }
+    };
 
     return (
         <nav className="fixed top-0 left-0 right-0 z-50 bg-white dark:bg-gray-900 shadow-sm border-b border-gray-100 dark:border-gray-800 transition-colors duration-300">
@@ -147,11 +180,44 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                         </button>
 
                         {/* Notifications Icon */}
-                        <button className="ml-2 p-2 rounded-full relative bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-accent dark:hover:text-[#bef264] transition-colors">
-                            <Bell size={20} />
-                            {/* Notification Badge */}
-                            <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white dark:border-gray-900"></span>
-                        </button>
+                        <div className="relative">
+                            <button className="ml-2 p-2 rounded-full relative bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-brand-accent dark:hover:text-[#bef264] transition-colors relative z-20">
+                                <Bell size={20} />
+                                {/* Notification Badge */}
+                                <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-red-500 rounded-full border border-white dark:border-gray-900"></span>
+                            </button>
+
+                            {/* Animated Notification Popup */}
+                            <AnimatePresence>
+                                {showNotification && currentNotification && (
+                                    <motion.a
+                                        href={currentNotification.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                                        transition={{ duration: 0.3, type: 'spring', bounce: 0.4 }}
+                                        className="absolute top-14 right-0 w-72 bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] dark:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] p-4 flex gap-4 cursor-pointer hover:border-brand-lime/50 dark:hover:border-brand-lime/50 group z-50 transition-colors"
+                                    >
+                                        <div className="mt-1 bg-gray-50 dark:bg-gray-800 w-8 h-8 rounded-full flex items-center justify-center shrink-0">
+                                            {getNotificationIcon(currentNotification.iconType)}
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-1 group-hover:text-brand-lime transition-colors leading-tight">
+                                                {currentNotification.title}
+                                            </h4>
+                                            <p className="text-xs text-gray-500 dark:text-gray-400 leading-snug">
+                                                {currentNotification.message}
+                                            </p>
+                                        </div>
+                                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <span className="text-xs font-bold text-brand-lime tracking-widest hidden sm:block">GO</span>
+                                        </div>
+                                    </motion.a>
+                                )}
+                            </AnimatePresence>
+                        </div>
 
                         {/* User Icon */}
                         <button className="ml-2 p-2 rounded-full bg-[#bef264] text-[#064e3b] hover:bg-[#a3e635] transition-colors">
