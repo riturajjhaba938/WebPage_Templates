@@ -46,6 +46,9 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
     // New State for comparison
     const [selectedForCompare, setSelectedForCompare] = useState([]);
 
+    // Mentor Filter State
+    const [selectedMentors, setSelectedMentors] = useState([]);
+
     // Helper to extract mentor ID for routing
     const getMentorIdByName = (mentorString) => {
         if (!mentorString) return null;
@@ -70,8 +73,11 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
             const matchesLevel = selectedLevel === 'All' || course.level === selectedLevel;
             // Format
             const matchesFormat = selectedFormat === 'All' || course.format === selectedFormat;
+            // Mentor
+            const cleanMentorName = course.mentor ? course.mentor.replace(/^By\s+/i, '').trim() : '';
+            const matchesMentor = selectedMentors.length === 0 || selectedMentors.includes(cleanMentorName);
 
-            return matchesSearch && matchesSubject && matchesPrice && matchesRating && matchesLevel && matchesFormat;
+            return matchesSearch && matchesSubject && matchesPrice && matchesRating && matchesLevel && matchesFormat && matchesMentor;
         });
 
         // Sorting
@@ -82,7 +88,7 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
         }
 
         return result;
-    }, [searchQuery, selectedSubjects, maxPrice, minRating, selectedLevel, selectedFormat, sortBy]);
+    }, [searchQuery, selectedSubjects, maxPrice, minRating, selectedLevel, selectedFormat, sortBy, selectedMentors]);
 
     const handleSubjectToggle = (subject) => {
         if (selectedSubjects.includes(subject)) {
@@ -100,6 +106,7 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
         setSelectedLevel('All');
         setSelectedFormat('All');
         setSortBy('Most Trending');
+        setSelectedMentors([]);
     };
 
     const handleToggleCompare = (courseId) => {
@@ -240,6 +247,38 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                                         ))}
                                     </div>
                                 </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Mentors Filter */}
+                    <div className="mb-8">
+                        <div className="flex items-center justify-between mb-4">
+                            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider">MENTORS</h4>
+                            <div className="h-px bg-gray-200 dark:bg-gray-700 flex-1 ml-3"></div>
+                        </div>
+                        <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+                            {mentorsData.map((mentor) => (
+                                <label key={mentor.id} className="flex items-center gap-3 cursor-pointer group">
+                                    <div className="relative flex items-center justify-center">
+                                        <input
+                                            type="checkbox"
+                                            className="peer w-5 h-5 rounded border-2 border-gray-300 dark:border-gray-600 outline-none appearance-none checked:bg-brand-lime checked:border-brand-lime transition-all cursor-pointer shrink-0"
+                                            checked={selectedMentors.includes(mentor.name)}
+                                            onChange={() => {
+                                                if (selectedMentors.includes(mentor.name)) {
+                                                    setSelectedMentors(selectedMentors.filter(name => name !== mentor.name));
+                                                } else {
+                                                    setSelectedMentors([...selectedMentors, mentor.name]);
+                                                }
+                                            }}
+                                        />
+                                        <CheckCircle size={14} className="absolute text-[#022c22] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" />
+                                    </div>
+                                    <span className={`group-hover:text-brand-lime transition-colors font-medium text-xs ${selectedMentors.includes(mentor.name) ? 'text-brand-lime font-bold' : ''}`}>
+                                        {mentor.name}
+                                    </span>
+                                </label>
                             ))}
                         </div>
                     </div>

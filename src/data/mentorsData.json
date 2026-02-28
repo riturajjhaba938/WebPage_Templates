@@ -21,8 +21,8 @@
             "AI Ethics"
         ],
         "courses": [
-            2,
-            8
+            18,
+            20
         ],
         "videoPreview": "https://example.com/sarah-intro.mp4",
         "videoThumbnail": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800&h=450",
@@ -57,9 +57,7 @@
             "Microservices"
         ],
         "courses": [
-            1,
-            5,
-            6
+            11
         ],
         "videoPreview": "https://example.com/vikram-intro.mp4",
         "videoThumbnail": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800&h=450",
@@ -85,7 +83,11 @@
             "Agile",
             "User Research"
         ],
-        "courses": [],
+        "courses": [
+            1,
+            5,
+            17
+        ],
         "videoPreview": "",
         "videoThumbnail": "https://images.unsplash.com/photo-1586717791821-3f44a5638d48?auto=format&fit=crop&q=80&w=800&h=450",
         "reviews": []
@@ -111,9 +113,11 @@
             "Full Stack"
         ],
         "courses": [
-            1,
-            5,
-            6
+            2,
+            10,
+            13,
+            21,
+            22
         ],
         "videoPreview": "",
         "videoThumbnail": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&q=80&w=800&h=450",
@@ -140,10 +144,101 @@
             "PowerBI"
         ],
         "courses": [
-            2
+            4,
+            7,
+            16
         ],
         "videoPreview": "",
         "videoThumbnail": "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&q=80&w=800&h=450",
+        "reviews": []
+    },
+    {
+        "id": 6,
+        "name": "Prof. Ananya Sharma",
+        "role": "UX/UI Lead",
+        "company": "Design Masters",
+        "bio": "Crafting intuitive digital experiences.",
+        "image": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=150&h=150",
+        "trending": true,
+        "verified": true,
+        "hourlyRate": 40,
+        "successRate": "94%",
+        "experience": "8+ Yrs",
+        "students": "2,100+",
+        "availability": "MEDIUM",
+        "about": "Expert in human-computer interaction with a passion for teaching modern design principles. I focus on bridging the gap between aesthetics and functionality.",
+        "tags": [
+            "UI/UX",
+            "Figma",
+            "Design Thinking"
+        ],
+        "courses": [
+            6,
+            8,
+            23,
+            24
+        ],
+        "videoPreview": "",
+        "videoThumbnail": "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800&h=450",
+        "reviews": []
+    },
+    {
+        "id": 7,
+        "name": "David Miller",
+        "role": "Cybersecurity Expert",
+        "company": "SecOps Inc",
+        "bio": "Protecting digital perimeters globally.",
+        "image": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=150&h=150",
+        "trending": true,
+        "verified": true,
+        "hourlyRate": 65,
+        "successRate": "97%",
+        "experience": "15+ Yrs",
+        "students": "1,500+",
+        "availability": "LOW",
+        "about": "Former ethical hacker turned educator. I specialize in penetration testing, network security, and advanced threat detection. I help students build secure systems from the ground up.",
+        "tags": [
+            "Ethical Hacking",
+            "Network Security",
+            "Cryptography"
+        ],
+        "courses": [
+            12,
+            15
+        ],
+        "videoPreview": "",
+        "videoThumbnail": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800&h=450",
+        "reviews": []
+    },
+    {
+        "id": 8,
+        "name": "Elena Rodriguez",
+        "role": "AI Researcher",
+        "company": "OpenAI",
+        "bio": "Advancing natural language processing.",
+        "image": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150",
+        "trending": false,
+        "verified": true,
+        "hourlyRate": 70,
+        "successRate": "99%",
+        "experience": "6+ Yrs",
+        "students": "8,000+",
+        "availability": "HIGH",
+        "about": "Focusing on large language models and multi-modal AI architectures. I transform cutting-edge research papers into accessible learning pathways for future AI engineers.",
+        "tags": [
+            "NLP",
+            "Generative AI",
+            "PyTorch"
+        ],
+        "courses": [
+            3,
+            9,
+            14,
+            19,
+            25
+        ],
+        "videoPreview": "",
+        "videoThumbnail": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800&h=450",
         "reviews": []
     }
 ]

@@ -2,7 +2,7 @@
     {
         "id": 1,
         "title": "Introduction to React.js",
-        "mentor": "By React Team",
+        "mentor": "By Kavita Patel",
         "duration": "2 Months",
         "rating": 4.8,
         "reviews": "1.2k",
@@ -13,12 +13,13 @@
         "verified": true,
         "subject": "Full Stack Development",
         "level": "Beginner",
-        "format": "Online"
+        "format": "Online",
+        "mentorImage": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 2,
         "title": "Python for Data Science",
-        "mentor": "By Python Masters",
+        "mentor": "By Arjun Red",
         "duration": "4 Months",
         "rating": 4.9,
         "reviews": "890",
@@ -29,12 +30,13 @@
         "verified": true,
         "subject": "Data Science",
         "level": "Intermediate",
-        "format": "Online"
+        "format": "Online",
+        "mentorImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 3,
         "title": "UI/UX Design Fundamentals",
-        "mentor": "By Design Academy",
+        "mentor": "By Elena Rodriguez",
         "duration": "3 Months",
         "rating": 4.7,
         "reviews": "500",
@@ -45,12 +47,13 @@
         "verified": true,
         "subject": "UI/UX Design",
         "level": "Beginner",
-        "format": "Online"
+        "format": "Online",
+        "mentorImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 4,
         "title": "Digital Marketing 101",
-        "mentor": "By Growth Guru",
+        "mentor": "By Sneha Gupta",
         "duration": "1 Month",
         "rating": 4.5,
         "reviews": "340",
@@ -61,12 +64,13 @@
         "verified": false,
         "subject": "Digital Marketing",
         "level": "Beginner",
-        "format": "Online"
+        "format": "Online",
+        "mentorImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 5,
         "title": "Mastering TypeScript",
-        "mentor": "By Tech Leads",
+        "mentor": "By Kavita Patel",
         "duration": "2 Months",
         "rating": 4.8,
         "reviews": "250",
@@ -77,12 +81,13 @@
         "verified": true,
         "subject": "Full Stack Development",
         "level": "Intermediate",
-        "format": "Online"
+        "format": "Online",
+        "mentorImage": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 6,
         "title": "Advanced Full Stack Development",
-        "mentor": "By Mentor Akhil Sharma",
+        "mentor": "By Prof. Ananya Sharma",
         "duration": "6 Months",
         "rating": 4.9,
         "reviews": "2.5k",
@@ -94,12 +99,13 @@
         "subject": "Full Stack Development",
         "level": "Advanced",
         "format": "Online",
-        "bgTheme": "bg-slate-700"
+        "bgTheme": "bg-slate-700",
+        "mentorImage": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 7,
         "title": "Professional UI/UX Design Masterclass",
-        "mentor": "By Mentor Sarah Chiao",
+        "mentor": "By Sneha Gupta",
         "duration": "3 Months",
         "rating": 4.8,
         "reviews": "856",
@@ -111,12 +117,13 @@
         "subject": "UI/UX Design",
         "level": "Intermediate",
         "format": "Online",
-        "bgTheme": "bg-[#b6c6bd]"
+        "bgTheme": "bg-[#b6c6bd]",
+        "mentorImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 8,
         "title": "Data Science & AI Boot Camp",
-        "mentor": "By TechAcademy Team",
+        "mentor": "By Prof. Ananya Sharma",
         "duration": "9 Months",
         "rating": 4.7,
         "reviews": "2.1k",
@@ -128,12 +135,13 @@
         "subject": "Data Science",
         "level": "Advanced",
         "format": "Offline",
-        "bgTheme": "bg-[#2f7d8c]"
+        "bgTheme": "bg-[#2f7d8c]",
+        "mentorImage": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 9,
         "title": "Digital Marketing Strategy 2024",
-        "mentor": "By Growth Guru",
+        "mentor": "By Elena Rodriguez",
         "duration": "4 Months",
         "rating": 4.6,
         "reviews": "432",
@@ -145,12 +153,13 @@
         "subject": "Digital Marketing",
         "level": "Intermediate",
         "format": "Online",
-        "bgTheme": "bg-[#7eb8b1]"
+        "bgTheme": "bg-[#7eb8b1]",
+        "mentorImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 10,
         "title": "Foundation Physics & Math (Class 11 & 12)",
-        "mentor": "By Dr. H. C. Verma",
+        "mentor": "By Arjun Red",
         "duration": "12 Months",
         "rating": 4.9,
         "reviews": "12.4k",
@@ -162,12 +171,13 @@
         "subject": "JEE/NEET/GATE",
         "level": "Advanced",
         "format": "Offline",
-        "bgTheme": "bg-[#4f46e5]"
+        "bgTheme": "bg-[#4f46e5]",
+        "mentorImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 11,
         "title": "Comprehensive UPSC CSE Preparation",
-        "mentor": "By IAS Connect",
+        "mentor": "By Vikram Singh",
         "duration": "18 Months",
         "rating": 4.8,
         "reviews": "5.1k",
@@ -179,12 +189,13 @@
         "subject": "UPSC/STATE/PCS",
         "level": "Advanced",
         "format": "Online",
-        "bgTheme": "bg-[#b91c1c]"
+        "bgTheme": "bg-[#b91c1c]",
+        "mentorImage": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 12,
         "title": "Complete K-12 Setup",
-        "mentor": "By MasterClass Kids",
+        "mentor": "By David Miller",
         "duration": "12 Months",
         "rating": 4.6,
         "reviews": "3.2k",
@@ -196,12 +207,13 @@
         "subject": "ACADEMIC K 12",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-yellow-600"
+        "bgTheme": "bg-yellow-600",
+        "mentorImage": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 13,
         "title": "CLAT Success Blueprint",
-        "mentor": "By Law Prep Tutorial",
+        "mentor": "By Arjun Red",
         "duration": "9 Months",
         "rating": 4.7,
         "reviews": "2.8k",
@@ -213,14 +225,15 @@
         "subject": "SAT/CAT/CLAT",
         "level": "Advanced",
         "format": "Offline",
-        "bgTheme": "bg-slate-800"
+        "bgTheme": "bg-slate-800",
+        "mentorImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 14,
         "title": "AI & Deep Learning Specialization",
-        "mentor": "By Andrew Ng",
+        "mentor": "By Elena Rodriguez",
         "duration": "6 Months",
-        "rating": 5.0,
+        "rating": 5,
         "reviews": "250k",
         "price": "₹12,500",
         "priceValue": 12500,
@@ -230,12 +243,13 @@
         "subject": "AI & MACHINE LEARNING",
         "level": "Intermediate",
         "format": "Online",
-        "bgTheme": "bg-[#0f172a]"
+        "bgTheme": "bg-[#0f172a]",
+        "mentorImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 15,
         "title": "Data Science with Python",
-        "mentor": "By DataCamp",
+        "mentor": "By David Miller",
         "duration": "3 Months",
         "rating": 4.8,
         "reviews": "12k",
@@ -247,12 +261,13 @@
         "subject": "DATA SCI & ANALYST",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-teal-700"
+        "bgTheme": "bg-teal-700",
+        "mentorImage": "https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 16,
         "title": "Software Engineering MasterTrack",
-        "mentor": "By Coders Trust",
+        "mentor": "By Sneha Gupta",
         "duration": "6 Months",
         "rating": 4.7,
         "reviews": "4.5k",
@@ -264,12 +279,13 @@
         "subject": "SOFTWARE DEV.",
         "level": "Intermediate",
         "format": "Online",
-        "bgTheme": "bg-blue-800"
+        "bgTheme": "bg-blue-800",
+        "mentorImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 17,
         "title": "90 Days to Full Stack Developer",
-        "mentor": "By Neog Camp",
+        "mentor": "By Kavita Patel",
         "duration": "3 Months",
         "rating": 4.9,
         "reviews": "8.9k",
@@ -281,12 +297,13 @@
         "subject": "90 DAYS JOB READY",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-indigo-600"
+        "bgTheme": "bg-indigo-600",
+        "mentorImage": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 18,
         "title": "Civic Sense & Public Duty",
-        "mentor": "By Social Justice Foundation",
+        "mentor": "By Dr. Sarah Johnson",
         "duration": "1 Month",
         "rating": 4.5,
         "reviews": "500",
@@ -298,12 +315,13 @@
         "subject": "CIVIL SENS",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-green-700"
+        "bgTheme": "bg-green-700",
+        "mentorImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 19,
         "title": "Logical & Critical Thinking Workshop",
-        "mentor": "By Brain Games",
+        "mentor": "By Elena Rodriguez",
         "duration": "2 Months",
         "rating": 4.8,
         "reviews": "1.2k",
@@ -315,12 +333,13 @@
         "subject": "CRITICAL THINKING",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-gray-800"
+        "bgTheme": "bg-gray-800",
+        "mentorImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 20,
         "title": "Overcoming Digital Addiction",
-        "mentor": "By Digital Wellness",
+        "mentor": "By Dr. Sarah Johnson",
         "duration": "1 Month",
         "rating": 4.9,
         "reviews": "3.4k",
@@ -332,12 +351,13 @@
         "subject": "ADDICTION MANAGMENT",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-rose-700"
+        "bgTheme": "bg-rose-700",
+        "mentorImage": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 21,
         "title": "Anger Management & Emotional Intelligence",
-        "mentor": "By Mindful Living",
+        "mentor": "By Arjun Red",
         "duration": "2 Months",
         "rating": 4.7,
         "reviews": "2.1k",
@@ -349,12 +369,13 @@
         "subject": "ANGER MANAGMENT",
         "level": "Intermediate",
         "format": "Online",
-        "bgTheme": "bg-[#991b1b]"
+        "bgTheme": "bg-[#991b1b]",
+        "mentorImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 22,
         "title": "Holistic Personality Development",
-        "mentor": "By Confidence Coach",
+        "mentor": "By Arjun Red",
         "duration": "3 Months",
         "rating": 4.8,
         "reviews": "4.5k",
@@ -366,12 +387,13 @@
         "subject": "PERSONALITY DEVELOPMENT",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-[#b45309]"
+        "bgTheme": "bg-[#b45309]",
+        "mentorImage": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 23,
         "title": "Executive Leadership Training",
-        "mentor": "By Harvard Business Online",
+        "mentor": "By Prof. Ananya Sharma",
         "duration": "6 Months",
         "rating": 4.9,
         "reviews": "1.5k",
@@ -383,12 +405,13 @@
         "subject": "LEADERSHIP",
         "level": "Advanced",
         "format": "Online",
-        "bgTheme": "bg-[#1e3a8a]"
+        "bgTheme": "bg-[#1e3a8a]",
+        "mentorImage": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 24,
         "title": "Rewiring Your Self: Habits & Mindfulness",
-        "mentor": "By Zen Academy",
+        "mentor": "By Prof. Ananya Sharma",
         "duration": "2 Months",
         "rating": 4.8,
         "reviews": "2.9k",
@@ -400,12 +423,13 @@
         "subject": "REWIRING YOUR SELF",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-[#065f46]"
+        "bgTheme": "bg-[#065f46]",
+        "mentorImage": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=150&h=150"
     },
     {
         "id": 25,
         "title": "Creative Design Principles",
-        "mentor": "By Design Academy",
+        "mentor": "By Elena Rodriguez",
         "duration": "3 Months",
         "rating": 4.7,
         "reviews": "900",
@@ -417,6 +441,7 @@
         "subject": "CREATIVE DESIGN",
         "level": "Beginner",
         "format": "Online",
-        "bgTheme": "bg-[#86198f]"
+        "bgTheme": "bg-[#86198f]",
+        "mentorImage": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=150&h=150"
     }
 ]
