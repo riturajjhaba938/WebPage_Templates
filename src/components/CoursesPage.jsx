@@ -44,6 +44,8 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
     const [selectedLevel, setSelectedLevel] = useState('All');
     const [selectedFormat, setSelectedFormat] = useState('All');
     const [sortBy, setSortBy] = useState('Most Trending');
+    const [currentPage, setCurrentPage] = useState(1);
+    const COURSES_PER_PAGE = 9;
 
     // Mobile specific UI state
     const [showMobileFilters, setShowMobileFilters] = useState(false);
@@ -95,6 +97,17 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
         return result;
     }, [searchQuery, selectedSubjects, maxPrice, minRating, selectedLevel, selectedFormat, sortBy, selectedMentors]);
 
+    // Reset pagination to page 1 whenever filters change
+    React.useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery, selectedSubjects, maxPrice, minRating, selectedLevel, selectedFormat, sortBy, selectedMentors]);
+
+    const totalPages = Math.ceil(filteredCourses.length / COURSES_PER_PAGE);
+    const currentCourses = filteredCourses.slice(
+        (currentPage - 1) * COURSES_PER_PAGE,
+        currentPage * COURSES_PER_PAGE
+    );
+
     const handleSubjectToggle = (subject) => {
         if (selectedSubjects.includes(subject)) {
             setSelectedSubjects(selectedSubjects.filter(s => s !== subject));
@@ -112,6 +125,7 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
         setSelectedFormat('All');
         setSortBy('Most Trending');
         setSelectedMentors([]);
+        setCurrentPage(1);
     };
 
     const handleToggleCompare = (courseId) => {
@@ -426,7 +440,7 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                         {/* Course Grid */}
                         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8">
                             <AnimatePresence>
-                                {filteredCourses.map((course) => (
+                                {currentCourses.map((course) => (
                                     <motion.div
                                         layout
                                         initial={{ opacity: 0, y: 20 }}
@@ -548,8 +562,50 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                             </AnimatePresence>
                         </motion.div>
 
-                        {/* Pagination */}
-                        {filteredCourses.length > 0 && (
+                        {/* Pagination UI */}
+                        {totalPages > 1 && (
+                            <div className="flex justify-center items-center gap-2 mt-12 mb-8">
+                                <button
+                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                    disabled={currentPage === 1}
+                                    className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${currentPage === 1
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600'
+                                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700 shadow-sm'
+                                        }`}
+                                >
+                                    Previous
+                                </button>
+
+                                <div className="flex items-center gap-1 mx-2">
+                                    {[...Array(totalPages)].map((_, i) => (
+                                        <button
+                                            key={i}
+                                            onClick={() => setCurrentPage(i + 1)}
+                                            className={`w-10 h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${currentPage === i + 1
+                                                ? 'bg-[#bef264] text-[#022c22] shadow-md'
+                                                : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700 dark:hover:bg-gray-700'
+                                                }`}
+                                        >
+                                            {i + 1}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <button
+                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                    disabled={currentPage === totalPages}
+                                    className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${currentPage === totalPages
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600'
+                                        : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700 shadow-sm'
+                                        }`}
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        )}
+
+                        {/* Empty State */}
+                        {filteredCourses.length === 0 && (
                             <div className="flex justify-center mt-12 gap-3 items-center text-sm font-black pb-8">
                                 <button className="w-10 h-10 rounded-xl flex items-center justify-center text-gray-400 hover:bg-white dark:hover:bg-gray-800 hover:text-[#022c22] dark:hover:text-brand-lime shadow-sm transition-colors border border-gray-200 dark:border-gray-700"><ChevronLeft size={18} /></button>
                                 <button className="w-10 h-10 rounded-xl flex items-center justify-center bg-[#022c22] text-brand-lime shadow-lg">1</button>

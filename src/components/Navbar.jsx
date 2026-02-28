@@ -80,12 +80,20 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
             }
         };
 
+        const handleScroll = () => {
+            if (isNotificationMenuOpen) {
+                setIsNotificationMenuOpen(false);
+            }
+        };
+
         if (isNotificationMenuOpen) {
             document.addEventListener('mousedown', handleClickOutside);
+            window.addEventListener('scroll', handleScroll, { passive: true });
         }
 
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
+            window.removeEventListener('scroll', handleScroll);
         };
     }, [isNotificationMenuOpen]);
 
