@@ -109,7 +109,7 @@ const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = 
                 <div className="flex justify-between items-center h-16">
 
                     {/* Logo with New Image and Animated Brand Name */}
-                    <div className="flex items-center gap-2 cursor-pointer w-[60%] md:w-auto md:min-w-[300px]" onClick={onHomeClick}>
+                    <div className="flex items-center gap-2 cursor-pointer w-[60%] md:w-[350px] lg:w-[400px] xl:w-[450px] shrink-0" onClick={onHomeClick}>
                         <img src={vedifaiLogo} alt="Vedifai Logo" className="h-[40px] md:h-[50px] w-auto object-contain rounded-lg flex-shrink-0" />
                         <div className="flex items-center">
                             <AnimatePresence mode="wait">
