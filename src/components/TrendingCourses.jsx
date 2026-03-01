@@ -5,7 +5,7 @@ import CourseDetailsPopup from './CourseDetailsPopup';
 
 import coursesData from '../data/coursesData.json';
 
-const courses = coursesData.filter(c => c.trending);
+const courses = coursesData.filter(c => c.trending).slice(0, 9);
 
 const TrendingCourses = ({ onCompare }) => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
