@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3002/api/v1/public/landing';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3002/api/v1/public/landing';
 
 /**
  * Service to handle VEDIFAI Public Landing API requests.
@@ -18,15 +18,16 @@ const apiService = {
             }
         });
 
-        const url = `${BASE_URL}/courses?${queryParams.toString()}`;
+        const url = `${BASE_URL}/courses-and-batches?${queryParams.toString()}`;
         
         try {
             const response = await fetch(url);
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to fetch courses');
+                throw new Error(errorData.error?.message || 'Failed to fetch courses');
             }
-            return await response.json();
+            const json = await response.json();
+            return json.data;
         } catch (error) {
             console.error('API Error (getCoursesAndBatches):', error);
             throw error;
@@ -53,9 +54,10 @@ const apiService = {
             const response = await fetch(url);
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to fetch teachers');
+                throw new Error(errorData.error?.message || 'Failed to fetch teachers');
             }
-            return await response.json();
+            const json = await response.json();
+            return json.data;
         } catch (error) {
             console.error('API Error (getTeachers):', error);
             throw error;
