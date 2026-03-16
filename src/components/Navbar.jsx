@@ -6,7 +6,7 @@ import notificationsData from '../data/notificationsData.json';
 
 const PREDEFINED_TEXTS = [
     "VEDIFAI",
-    "India's On-Demand Personalised Learning Platform for Every Student"
+    "Discover your path & build a future you truly believe in."
 ];
 
 const Navbar = ({ theme, toggleTheme, onHomeClick = () => { }, onCoursesClick = () => { }, onSupportClick = () => { }, onMentorsClick = () => { } }) => {

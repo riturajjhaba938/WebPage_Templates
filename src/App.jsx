@@ -14,6 +14,7 @@ import MentorsPage from './components/MentorsPage';
 import SupportHub from './components/SupportHub';
 import ChatbotWidget from './components/ChatbotWidget';
 import IntroAnimation from './components/IntroAnimation';
+import HexagonSection from './components/HexagonSection';
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -161,6 +162,8 @@ function App() {
         {currentPage === 'home' ? (
           <>
             <Hero onNavigate={navigateTo} />
+            <HexagonSection />
+
 
             {/* Compact Stacking */}
             <div className="flex flex-col relative z-20">

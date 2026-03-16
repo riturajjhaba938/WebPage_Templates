@@ -1,9 +1,29 @@
-import React from 'react';
-import { Linkedin, Twitter, ArrowLeft, Users } from 'lucide-react';
-import { motion } from 'framer-motion';
-import mentorsData from '../data/mentorsData.json';
+import apiService from '../api/apiService';
+import { mapTeacherToMentorCard } from '../utils/dataMapping';
 
 const MentorsPage = ({ onNavigate, onBack }) => {
+    const [mentors, setMentors] = React.useState([]);
+    const [loading, setLoading] = React.useState(true);
+    const [error, setError] = React.useState(null);
+
+    React.useEffect(() => {
+        const fetchMentors = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const data = await apiService.getTeachers({ page: 1, limit: 20 });
+                const mappedMentors = (data.teachers || []).map(mapTeacherToMentorCard);
+                setMentors(mappedMentors);
+            } catch (err) {
+                setError(err.message || 'Failed to load mentors');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchMentors();
+    }, []);
+
     return (
         <div className="bg-gray-50 dark:bg-gray-900 min-h-screen pb-24 transition-colors duration-300 font-sans">
 
@@ -34,57 +54,67 @@ const MentorsPage = ({ onNavigate, onBack }) => {
                         Back to Home
                     </button>
                     <div className="text-[10px] sm:text-xs text-center font-bold text-gray-500 uppercase tracking-widest bg-gray-50 dark:bg-gray-700 px-3 sm:px-4 py-2 rounded-xl border border-gray-200 dark:border-gray-600 w-full sm:w-auto">
-                        Showing {mentorsData.length} Mentors
+                        {loading ? 'Discovering...' : `Showing ${mentors.length} Mentors`}
                     </div>
                 </div>
 
                 {/* Mentors Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {mentorsData.map((mentor) => (
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3 }}
-                            key={mentor.id}
-                            onClick={() => onNavigate && onNavigate('mentorProfile', mentor.id)}
-                            className="group relative h-[280px] perspective-1000 cursor-pointer"
-                        >
-                            <div className="relative w-full h-full transition-all duration-500 transform style-preserve-3d group-hover:rotate-y-180">
-                                {/* Front Side */}
-                                <div className="absolute inset-0 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl flex flex-col items-center p-6 backface-hidden border border-gray-100 dark:border-gray-700 transition-all duration-300">
-                                    {mentor.trending && (
-                                        <div className="absolute top-3 right-3 bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-wide">
-                                            Trending
+                    {loading ? (
+                        [...Array(8)].map((_, i) => (
+                            <div key={i} className="h-[280px] bg-white dark:bg-gray-800 rounded-2xl animate-pulse shadow-sm border border-gray-100 dark:border-gray-700"></div>
+                        ))
+                    ) : error ? (
+                        <div className="col-span-full py-20 text-center">
+                            <p className="text-rose-500 font-bold">{error}</p>
+                        </div>
+                    ) : (
+                        mentors.map((mentor) => (
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.3 }}
+                                key={mentor.id}
+                                onClick={() => onNavigate && onNavigate('mentorProfile', mentor.id)}
+                                className="group relative h-[280px] perspective-1000 cursor-pointer"
+                            >
+                                <div className="relative w-full h-full transition-all duration-500 transform style-preserve-3d group-hover:rotate-y-180">
+                                    {/* Front Side */}
+                                    <div className="absolute inset-0 bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl flex flex-col items-center p-6 backface-hidden border border-gray-100 dark:border-gray-700 transition-all duration-300">
+                                        {mentor.trending && (
+                                            <div className="absolute top-3 right-3 bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400 text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-wide">
+                                                Trending
+                                            </div>
+                                        )}
+                                        <div className="w-24 h-24 rounded-full mb-4 border-4 border-gray-50 dark:border-gray-700 overflow-hidden shadow-sm transition-colors duration-300">
+                                            <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover rounded-full" />
                                         </div>
-                                    )}
-                                    <div className="w-24 h-24 rounded-full mb-4 border-4 border-gray-50 dark:border-gray-700 overflow-hidden shadow-sm transition-colors duration-300">
-                                        <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover rounded-full" />
+                                        <h3 className="text-gray-900 dark:text-white font-black text-lg text-center leading-tight mb-1">{mentor.name}</h3>
+                                        <p className="text-[#65a30d] dark:text-[#a3e635] text-xs font-bold text-center mb-1">{mentor.role}</p>
+                                        <p className="text-gray-500 dark:text-gray-400 text-[11px] text-center mt-auto font-medium bg-gray-50 dark:bg-gray-700/50 px-3 py-1.5 rounded-lg w-full">@ {mentor.company}</p>
                                     </div>
-                                    <h3 className="text-gray-900 dark:text-white font-black text-lg text-center leading-tight mb-1">{mentor.name}</h3>
-                                    <p className="text-[#65a30d] dark:text-[#a3e635] text-xs font-bold text-center mb-1">{mentor.role}</p>
-                                    <p className="text-gray-500 dark:text-gray-400 text-[11px] text-center mt-auto font-medium bg-gray-50 dark:bg-gray-700/50 px-3 py-1.5 rounded-lg w-full">@ {mentor.company}</p>
-                                </div>
 
-                                {/* Back Side (Hover Info) */}
-                                <div className="absolute inset-0 bg-[#064e3b] dark:bg-[#022c22] rounded-2xl shadow-xl flex flex-col items-center justify-center p-6 text-center backface-hidden rotate-y-180 border border-green-800 transition-colors duration-300">
-                                    <p className="text-white text-xs font-medium mb-5 leading-relaxed line-clamp-4 opacity-90">
-                                        "{mentor.bio}"
-                                    </p>
-                                    <div className="flex space-x-3 mb-4">
-                                        <div className="p-2 bg-white/10 text-white rounded-full hover:bg-[#84cc16] hover:text-[#022c22] transition-colors duration-300">
-                                            <Linkedin size={16} />
+                                    {/* Back Side (Hover Info) */}
+                                    <div className="absolute inset-0 bg-[#064e3b] dark:bg-[#022c22] rounded-2xl shadow-xl flex flex-col items-center justify-center p-6 text-center backface-hidden rotate-y-180 border border-green-800 transition-colors duration-300">
+                                        <p className="text-white text-xs font-medium mb-5 leading-relaxed line-clamp-4 opacity-90">
+                                            {mentor.bio ? `"${mentor.bio}"` : "Dedicated educator helping students achieve their career goals with personalized mentorship."}
+                                        </p>
+                                        <div className="flex space-x-3 mb-4">
+                                            <div className="p-2 bg-white/10 text-white rounded-full hover:bg-[#84cc16] hover:text-[#022c22] transition-colors duration-300">
+                                                <Linkedin size={16} />
+                                            </div>
+                                            <div className="p-2 bg-white/10 text-white rounded-full hover:bg-[#84cc16] hover:text-[#022c22] transition-colors duration-300">
+                                                <Twitter size={16} />
+                                            </div>
                                         </div>
-                                        <div className="p-2 bg-white/10 text-white rounded-full hover:bg-[#84cc16] hover:text-[#022c22] transition-colors duration-300">
-                                            <Twitter size={16} />
-                                        </div>
+                                        <button className="bg-[#84cc16] text-[#022c22] text-xs font-black px-6 py-2 rounded-full shadow-lg hover:bg-white transition-colors duration-300 uppercase tracking-wider w-full">
+                                            View Profile
+                                        </button>
                                     </div>
-                                    <button className="bg-[#84cc16] text-[#022c22] text-xs font-black px-6 py-2 rounded-full shadow-lg hover:bg-white transition-colors duration-300 uppercase tracking-wider w-full">
-                                        View Profile
-                                    </button>
                                 </div>
-                            </div>
-                        </motion.div>
-                    ))}
+                            </motion.div>
+                        ))
+                    )}
                 </div>
 
                 {/* CSS for Flip Effect */}

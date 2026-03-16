@@ -5,22 +5,22 @@ import { motion, useInView, useAnimation } from 'framer-motion';
 const steps = [
     {
         icon: <Search className="text-white relative z-20" size={32} />,
-        title: "1. Search & Filter",
-        desc: "Find verified tutors and institutes in your area.",
+        title: "1. Personality Test",
+        desc: "Discover your true interests and identify the career path that truly fits you.",
         color: "bg-brand-default dark:bg-[#4ade80] text-white",
         ringColor: "ring-brand-default/30 dark:ring-[#4ade80]/20"
     },
     {
         icon: <ShieldCheck className="text-gray-900 relative z-20" size={32} />,
-        title: "2. View Ratings",
-        desc: "Check real reviews and Vedifai verification scores.",
+        title: "2. Expert Mentors",
+        desc: "Connect with industry leaders who guide you step by step to your destination.",
         color: "bg-brand-lime text-gray-900",
         ringColor: "ring-brand-lime/50 dark:ring-brand-lime/30"
     },
     {
         icon: <GraduationCap className="text-white relative z-20" size={32} />,
-        title: "3. Start Learning",
-        desc: "Connect directly and begin your learning journey.",
+        title: "3. Live Projects",
+        desc: "Gain real-world experience with live projects and become a job-ready professional.",
         color: "bg-brand-dark-green dark:bg-[#064e3b] text-white",
         ringColor: "ring-brand-dark-green/30 dark:ring-[#064e3b]/40"
     }

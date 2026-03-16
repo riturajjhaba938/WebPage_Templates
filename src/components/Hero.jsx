@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Star, Play, ArrowRight, ShieldCheck, MapPin, CheckCircle, Users } from 'lucide-react';
+import { Search, Star, Play, ArrowRight, ShieldCheck, MapPin, CheckCircle, Users, Rocket } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import vedifaiLogo from '../assets/vedifai-logo.jpg';
 
@@ -7,9 +7,9 @@ import vedifaiLogo from '../assets/vedifai-logo.jpg';
 const heroSlides = [
     {
         id: 1,
-        title: "Vedifai Smart Match",
-        subtitle: "Find the Right Mentor, Anytime, Anywhere",
-        description: "Our AI-driven engine analyzes your learning style, goals, and location to connect you with the ideal tutors and institutes.",
+        title: "Career Discovery",
+        subtitle: "Unsure where to even begin?",
+        description: "Explore your strengths with our personality test and discover the right path that truly fits you.",
         accentColor: "from-brand-lime to-brand-accent",
         glowColor: "bg-brand-lime",
         icon: <Search className="text-brand-dark-green" size={32} />,
@@ -20,8 +20,8 @@ const heroSlides = [
                         <Users className="text-gray-900" size={24} />
                     </div>
                     <div>
-                        <div className="text-white font-bold">Matching Tutors...</div>
-                        <div className="text-brand-lime text-xs">Analyzing prerequisites</div>
+                        <div className="text-white font-bold">Analyzing Interests...</div>
+                        <div className="text-brand-lime text-xs">Personality Test in progress</div>
                     </div>
                 </div>
                 <div className="space-y-3 flex-1 overflow-hidden relative">
@@ -33,17 +33,7 @@ const heroSlides = [
                     >
                         <div className="w-8 h-8 rounded-full bg-gray-600"></div>
                         <div className="flex-1 h-2 bg-gray-600 rounded"></div>
-                        <div className="text-brand-lime font-bold text-sm">98% Match</div>
-                    </motion.div>
-                    <motion.div
-                        initial={{ x: -100, opacity: 0 }}
-                        animate={{ x: 0, opacity: 1 }}
-                        transition={{ delay: 0.4, type: "spring" }}
-                        className="w-full bg-gray-800 rounded-lg p-3 flex items-center gap-3"
-                    >
-                        <div className="w-8 h-8 rounded-full bg-gray-600"></div>
-                        <div className="flex-1 h-2 bg-gray-600 rounded"></div>
-                        <div className="text-yellow-400 font-bold text-sm">85% Match</div>
+                        <div className="text-brand-lime font-bold text-sm">Top Path: Tech</div>
                     </motion.div>
                 </div>
             </div>
@@ -51,12 +41,12 @@ const heroSlides = [
     },
     {
         id: 2,
-        title: "Rigorous Verification",
-        subtitle: "100% Trusted Platform",
-        description: "Every educator and institute undergoes Vedifai's strict verification process for background, credentials, and teaching quality.",
+        title: "Expert Mentorship",
+        subtitle: "Connect with Industry Leaders",
+        description: "Once you find your path, we connect you with expert mentors who guide you step by step to your destination.",
         accentColor: "from-blue-400 to-indigo-500",
         glowColor: "bg-blue-500",
-        icon: <ShieldCheck className="text-blue-900" size={32} />,
+        icon: <Users className="text-blue-900" size={32} />,
         visual: (
             <div className="relative w-full max-w-sm mx-auto h-56 bg-[#252525] rounded-2xl border border-gray-700 shadow-xl p-5 flex flex-col justify-center items-center">
                 <motion.div
@@ -65,14 +55,9 @@ const heroSlides = [
                     transition={{ type: "spring", bounce: 0.5 }}
                     className="w-20 h-20 rounded-full bg-blue-500/10 flex items-center justify-center mb-4 border-2 border-blue-500/50 relative"
                 >
-                    <motion.div
-                        className="absolute inset-0 rounded-full border-t-2 border-blue-400"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                    ></motion.div>
                     <CheckCircle className="text-blue-400" size={40} />
                 </motion.div>
-                <div className="text-white font-bold text-xl mb-3">Vedifai Certified</div>
+                <div className="text-white font-bold text-xl mb-3">Verified Mentors</div>
                 <div className="flex gap-1.5 w-full max-w-[200px]">
                     {[1, 2, 3, 4, 5].map(i => (
                         <motion.div
@@ -89,20 +74,17 @@ const heroSlides = [
     },
     {
         id: 3,
-        title: "Real Student Reviews",
-        subtitle: "Unbiased Feedback",
-        description: "Make informed decisions based on genuine, verified ratings and reviews from real students in your locality.",
+        title: "Real-World Experience",
+        subtitle: "Build Your Future with Live Projects",
+        description: "Get hands-on experience with live projects and structured learning paths to become a job-ready professional.",
         accentColor: "from-yellow-400 to-orange-500",
         glowColor: "bg-yellow-500",
-        icon: <Star className="text-yellow-900 fill-yellow-900" size={32} />,
+        icon: <Rocket className="text-yellow-900" size={32} />,
         visual: (
             <div className="relative w-full max-w-sm mx-auto h-56 bg-[#252525] rounded-2xl border border-gray-700 shadow-xl p-5 flex flex-col justify-center">
                 <div className="flex justify-between items-start mb-4">
                     <div className="flex -space-x-2">
                         {[1, 2, 3].map(i => <div key={i} className="w-10 h-10 rounded-full bg-gray-600 border border-gray-800"></div>)}
-                    </div>
-                    <div className="bg-yellow-400/20 text-yellow-400 px-3 py-1.5 rounded-md text-sm font-bold flex items-center gap-1">
-                        <Star size={14} className="fill-yellow-400" /> 4.9
                     </div>
                 </div>
                 <motion.div
@@ -111,16 +93,18 @@ const heroSlides = [
                     transition={{ delay: 0.3 }}
                     className="bg-gray-800 rounded-xl p-4 border border-gray-700 relative"
                 >
-                    <div className="absolute top-2 left-2 text-gray-500 text-3xl font-serif">"</div>
-                    <p className="text-gray-300 text-sm mt-3 ml-4 relative z-10 italic">"Vedifai helped me find the best physics tutor within miles. Totally verified!"</p>
-                    <div className="mt-2 text-xs text-gray-500 text-right">- Rahul S.</div>
+                    <p className="text-white text-sm font-bold">Portfolio Project #1</p>
+                    <div className="w-full bg-gray-700 h-2 rounded-full mt-2">
+                        <div className="bg-brand-lime h-full w-[80%] rounded-full"></div>
+                    </div>
+                    <div className="mt-2 text-[10px] text-gray-500 text-right">80% Complete</div>
                 </motion.div>
             </div>
         )
     }
 ];
 
-const Hero = () => {
+const Hero = ({ onNavigate = () => { } }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
 
     // Auto-slide effect

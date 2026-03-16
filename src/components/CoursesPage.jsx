@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { Search, X, CheckCircle, SlidersHorizontal, ChevronLeft, ChevronRight, Star, Filter, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import coursesData from '../data/coursesData.json';
-import mentorsData from '../data/mentorsData.json';
+import apiService from '../api/apiService';
+import { mapCourseToCard, mapTeacherToMentorCard } from '../utils/dataMapping';
 
 const categories = {
     KNOWLEDGE: [
@@ -47,6 +47,12 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const COURSES_PER_PAGE = 9;
 
+    // API State
+    const [courses, setCourses] = useState([]);
+    const [pagination, setPagination] = useState({ total_pages: 1, total_courses: 0 });
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
     // Mobile specific UI state
     const [showMobileFilters, setShowMobileFilters] = useState(false);
 
@@ -56,57 +62,81 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
     // Mentor Filter State
     const [selectedMentors, setSelectedMentors] = useState([]);
 
-    // Helper to extract mentor ID for routing
-    const getMentorIdByName = (mentorString) => {
-        if (!mentorString) return null;
-        const cleanName = mentorString.replace(/^By\s+/i, '').trim();
-        const mentor = mentorsData.find(m => m.name.toLowerCase() === cleanName.toLowerCase());
-        return mentor ? mentor.id : null;
+    /**
+     * Helper to map API category to frontend topic names if needed.
+     * For now, we assume the frontend sends the specific topic as the category filter.
+     */
+    const getCategoryParam = () => {
+        // If all topics are selected, or none are selected, don't filter by category on the API.
+        // However, the prompt says "When a user selects a category (e.g., 'skill'), ensure the query parameter ?category=skill is appended".
+        // This implies we might need to map our "subjects" back to their parent category.
+        
+        // Check if all subjects of a specific category are selected
+        for (const [cat, topics] of Object.entries(categories)) {
+            if (topics.every(t => selectedSubjects.includes(t)) && selectedSubjects.length === topics.length) {
+                return cat.toLowerCase();
+            }
+        }
+        
+        // If only one subject is selected, send that as category
+        if (selectedSubjects.length === 1) {
+            return selectedSubjects[0];
+        }
+        
+        return undefined;
     };
 
-    // Filter Logic
-    const filteredCourses = useMemo(() => {
-        let result = coursesData.filter(course => {
-            // Search
-            const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                course.mentor.toLowerCase().includes(searchQuery.toLowerCase());
-            // Subjects
-            const matchesSubject = selectedSubjects.includes(course.subject);
-            // Price
-            const matchesPrice = course.priceValue <= maxPrice;
-            // Rating
-            const matchesRating = course.rating >= minRating;
-            // Level
-            const matchesLevel = selectedLevel === 'All' || course.level === selectedLevel;
-            // Format
-            const matchesFormat = selectedFormat === 'All' || course.format === selectedFormat;
-            // Mentor
-            const cleanMentorName = course.mentor ? course.mentor.replace(/^By\s+/i, '').trim() : '';
-            const matchesMentor = selectedMentors.length === 0 || selectedMentors.includes(cleanMentorName);
+    // Data Fetching Logic
+    const fetchCourses = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const params = {
+                page: currentPage,
+                limit: COURSES_PER_PAGE,
+                category: getCategoryParam(),
+                level: selectedLevel !== 'All' ? selectedLevel : undefined,
+                mode: selectedFormat !== 'All' ? selectedFormat : undefined
+            };
 
-            return matchesSearch && matchesSubject && matchesPrice && matchesRating && matchesLevel && matchesFormat && matchesMentor;
-        });
+            const data = await apiService.getCoursesAndBatches(params);
+            
+            // Map the API course object to frontend shape using the utility
+            const mappedCourses = (data.courses || []).map(mapCourseToCard);
 
-        // Sorting
-        if (sortBy === 'Price: Low to High') {
-            result.sort((a, b) => a.priceValue - b.priceValue);
-        } else if (sortBy === 'Highest Rated') {
-            result.sort((a, b) => b.rating - a.rating);
+            setCourses(mappedCourses);
+            setPagination({
+                total_pages: data.pagination?.total_pages || 1,
+                total_courses: data.pagination?.total_courses || 0
+            });
+        } catch (err) {
+            setError(err.message || 'Error loading courses');
+        } finally {
+            setLoading(false);
         }
+    };
 
-        return result;
-    }, [searchQuery, selectedSubjects, maxPrice, minRating, selectedLevel, selectedFormat, sortBy, selectedMentors]);
+    React.useEffect(() => {
+        fetchCourses();
+    }, [currentPage, selectedSubjects, selectedLevel, selectedFormat]);
 
     // Reset pagination to page 1 whenever filters change
     React.useEffect(() => {
         setCurrentPage(1);
-    }, [searchQuery, selectedSubjects, maxPrice, minRating, selectedLevel, selectedFormat, sortBy, selectedMentors]);
+    }, [selectedSubjects, selectedLevel, selectedFormat]);
 
-    const totalPages = Math.ceil(filteredCourses.length / COURSES_PER_PAGE);
-    const currentCourses = filteredCourses.slice(
-        (currentPage - 1) * COURSES_PER_PAGE,
-        currentPage * COURSES_PER_PAGE
-    );
+    // Client-side filtering for search/price/rating as these might not be fully supported by basic landing API
+    const filteredCourses = useMemo(() => {
+        return courses.filter(course => {
+            const matchesSearch = !searchQuery || 
+                course.title.toLowerCase().includes(searchQuery.toLowerCase());
+            
+            const matchesPrice = course.priceValue <= maxPrice;
+            const matchesRating = course.rating >= minRating;
+
+            return matchesSearch && matchesPrice && matchesRating;
+        });
+    }, [courses, searchQuery, maxPrice, minRating]);
 
     const handleSubjectToggle = (subject) => {
         if (selectedSubjects.includes(subject)) {
@@ -134,7 +164,6 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                 return prev.filter(id => id !== courseId);
             }
             if (prev.length >= 3) {
-                // Maximum 3 courses can be compared at a time
                 alert("You can only compare up to 3 courses at a time.");
                 return prev;
             }
@@ -270,37 +299,18 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                         </div>
                     </div>
 
-                    {/* Mentors Filter */}
+                    {/* Mentors Filter (Hidden for now as API might not support it directly or we need a separate call) */}
+                    {/* 
                     <div className="mb-8">
                         <div className="flex items-center justify-between mb-4">
                             <h4 className="text-xs font-bold text-gray-400 uppercase tracking-wider">MENTORS</h4>
                             <div className="h-px bg-gray-200 dark:bg-gray-700 flex-1 ml-3"></div>
                         </div>
                         <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                            {mentorsData.map((mentor) => (
-                                <label key={mentor.id} className="flex items-center gap-3 cursor-pointer group">
-                                    <div className="relative flex items-center justify-center">
-                                        <input
-                                            type="checkbox"
-                                            className="peer w-5 h-5 rounded border-2 border-gray-300 dark:border-gray-600 outline-none appearance-none checked:bg-brand-lime checked:border-brand-lime transition-all cursor-pointer shrink-0"
-                                            checked={selectedMentors.includes(mentor.name)}
-                                            onChange={() => {
-                                                if (selectedMentors.includes(mentor.name)) {
-                                                    setSelectedMentors(selectedMentors.filter(name => name !== mentor.name));
-                                                } else {
-                                                    setSelectedMentors([...selectedMentors, mentor.name]);
-                                                }
-                                            }}
-                                        />
-                                        <CheckCircle size={14} className="absolute text-[#022c22] opacity-0 peer-checked:opacity-100 pointer-events-none transition-opacity" />
-                                    </div>
-                                    <span className={`group-hover:text-brand-lime transition-colors font-medium text-xs ${selectedMentors.includes(mentor.name) ? 'text-brand-lime font-bold' : ''}`}>
-                                        {mentor.name}
-                                    </span>
-                                </label>
-                            ))}
+                             ... API Teachers list could go here ...
                         </div>
                     </div>
+                    */}
 
                     {/* Extra Filters (Level & Format) */}
                     <div className="mb-8">
@@ -412,7 +422,11 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                                     Discover <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-[#84cc16] dark:from-[#bef264] dark:to-[#4ade80]">Courses</span>
                                 </h1>
                                 <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-xl transition-colors">
-                                    Showing <strong className="text-gray-900 dark:text-white">{filteredCourses.length}</strong> verified learning paths tailored to your career goals.
+                                    {loading ? (
+                                        <span>Discovering learning paths...</span>
+                                    ) : (
+                                        <span>Showing <strong className="text-gray-900 dark:text-white">{pagination.total_courses}</strong> verified learning paths tailored to your career goals.</span>
+                                    )}
                                 </p>
                             </div>
 
@@ -440,105 +454,127 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                         {/* Course Grid */}
                         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6 md:gap-8">
                             <AnimatePresence>
-                                {currentCourses.map((course) => (
-                                    <motion.div
-                                        layout
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, scale: 0.9 }}
-                                        transition={{ duration: 0.3 }}
-                                        key={course.id}
-                                        className="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
-                                    >
-                                        {/* Top Image Area */}
-                                        <div className={`${course.bgTheme || 'bg-[#1e3441]'} h-48 relative flex items-center justify-center overflow-hidden`}>
-                                            {course.image && (
-                                                <img src={course.image} alt={course.title} className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-700 ease-out" />
-                                            )}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent"></div>
-
-                                            {course.verified && (
-                                                <div className="absolute top-4 left-4 bg-[#bef264] text-[#022c22] text-xs font-black px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-lg">
-                                                    <CheckCircle size={12} /> VERIFIED
-                                                </div>
-                                            )}
-
-                                            <button
-                                                onClick={() => handleToggleCompare(course.id)}
-                                                className={`absolute top-4 right-4 text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer transition-all shadow-lg backdrop-blur ${selectedForCompare.includes(course.id)
-                                                    ? 'bg-brand-lime text-[#022c22] border-2 border-brand-lime shadow-[0_0_15px_rgba(190,242,100,0.5)]'
-                                                    : 'bg-white/10 text-white border border-white/30 hover:bg-white/30 hover:scale-105'
-                                                    }`}
-                                            >
-                                                {selectedForCompare.includes(course.id) ? (
-                                                    <>
-                                                        <CheckCircle size={14} className="text-[#022c22]" /> SELECTED
-                                                    </>
-                                                ) : (
-                                                    'COMPARE'
+                                {loading ? (
+                                    // Skeleton Loading State
+                                    [...Array(6)].map((_, i) => (
+                                        <div key={i} className="bg-white dark:bg-gray-800 rounded-3xl h-96 animate-pulse border border-gray-100 dark:border-gray-700"></div>
+                                    ))
+                                ) : error ? (
+                                     <div className="col-span-full py-20 text-center">
+                                         <p className="text-rose-500 font-bold">{error}</p>
+                                         <button onClick={fetchCourses} className="mt-4 text-brand-lime underline">Try Again</button>
+                                     </div>
+                                ) : (
+                                    filteredCourses.map((course) => (
+                                        <motion.div
+                                            layout
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, scale: 0.9 }}
+                                            transition={{ duration: 0.3 }}
+                                            key={course.id}
+                                            className="bg-white dark:bg-gray-800 rounded-3xl border border-gray-100 dark:border-gray-700 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col group"
+                                        >
+                                            {/* Top Image Area */}
+                                            <div className={`${course.bgTheme || 'bg-[#1e3441]'} h-48 relative flex items-center justify-center overflow-hidden`}>
+                                                {course.image && (
+                                                    <img src={course.image} alt={course.title} className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-transform duration-700 ease-out" />
                                                 )}
-                                            </button>
+                                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/40 to-transparent"></div>
 
-                                            {/* Format Badge overlay on image */}
-                                            <div className="absolute bottom-4 left-4 flex items-center gap-2">
-                                                <span className="bg-black/60 backdrop-blur text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest border border-white/20">
-                                                    {course.format}
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        {/* Details Area */}
-                                        <div className="p-6 md:p-7 flex flex-col flex-1 bg-white dark:bg-gray-800 transition-colors duration-300">
-                                            <div className="flex-1">
-                                                <div className="text-[10px] font-black text-[#65a30d] dark:text-[#a3e635] mb-2 uppercase tracking-widest transition-colors">{course.subject}</div>
-                                                <h3 className="font-black text-xl text-[#022c22] dark:text-white mb-2 leading-tight group-hover:text-brand-lime transition-colors">
-                                                    {course.title}
-                                                </h3>
-                                                <div
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        if (onNavigate) onNavigate('mentorProfile', getMentorIdByName(course.mentor));
-                                                    }}
-                                                    className="flex items-center gap-2 mb-4 cursor-pointer group/mentor hover:bg-gray-50 dark:hover:bg-gray-700/50 p-1.5 -ml-1.5 rounded-lg transition-colors inline-flex"
-                                                >
-                                                    <div className="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex shrink-0 border border-gray-300 dark:border-gray-600 overflow-hidden group-hover/mentor:border-brand-lime transition-colors">
-                                                        {course.mentorImage ? <img src={course.mentorImage} alt="mentor" className="w-full h-full object-cover group-hover/mentor:scale-110 transition-transform" /> : null}
+                                                {course.verified && (
+                                                    <div className="absolute top-4 left-4 bg-[#bef264] text-[#022c22] text-xs font-black px-3 py-1.5 rounded-lg flex items-center gap-1.5 shadow-lg">
+                                                        <CheckCircle size={12} /> VERIFIED
                                                     </div>
-                                                    <p className="text-gray-600 dark:text-gray-400 text-sm font-medium transition-colors group-hover/mentor:text-brand-lime dark:group-hover/mentor:text-brand-lime">
-                                                        {course.mentor}
-                                                    </p>
-                                                </div>
+                                                )}
 
-                                                <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-gray-600 dark:text-gray-300 mb-6 transition-colors">
-                                                    <span className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-900 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                                                        <Clock size={12} className="text-brand-lime" /> {course.duration}
-                                                    </span>
-                                                    <span className="flex items-center gap-1.5 bg-[#fefce8] dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-500 px-3 py-1.5 rounded-lg border border-yellow-200 dark:border-yellow-700/50 shadow-sm">
-                                                        <Star size={12} className="fill-current" /> {course.rating} ({course.reviews})
-                                                    </span>
-                                                </div>
-                                            </div>
-
-                                            {/* Action Footer */}
-                                            <div className="flex items-end justify-between border-t border-gray-100 dark:border-gray-700 pt-5 mt-auto transition-colors duration-300">
-                                                <div>
-                                                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Lifetime Access</div>
-                                                    <div className="font-black text-2xl text-[#022c22] dark:text-white leading-none transition-colors">{course.price}</div>
-                                                </div>
-                                                <a
-                                                    href={course.link || "#"}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="bg-[#022c22] dark:bg-white text-white dark:text-[#022c22] text-sm font-black px-6 py-3 rounded-xl hover:bg-brand-lime hover:text-[#022c22] transition-colors shadow-lg active:scale-95 flex items-center gap-2"
+                                                <button
+                                                    onClick={() => handleToggleCompare(course.id)}
+                                                    className={`absolute top-4 right-4 text-xs font-bold px-4 py-2 rounded-full flex items-center gap-1.5 cursor-pointer transition-all shadow-lg backdrop-blur ${selectedForCompare.includes(course.id)
+                                                        ? 'bg-brand-lime text-[#022c22] border-2 border-brand-lime shadow-[0_0_15px_rgba(190,242,100,0.5)]'
+                                                        : 'bg-white/10 text-white border border-white/30 hover:bg-white/30 hover:scale-105'
+                                                        }`}
                                                 >
-                                                    ENROLL <ChevronRight size={16} />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                ))}
+                                                    {selectedForCompare.includes(course.id) ? (
+                                                        <>
+                                                            <CheckCircle size={14} className="text-[#022c22]" /> SELECTED
+                                                        </>
+                                                    ) : (
+                                                        'COMPARE'
+                                                    )}
+                                                </button>
 
-                                {filteredCourses.length === 0 && (
+                                                {/* Format Badge overlay on image */}
+                                                <div className="absolute bottom-4 left-4 flex items-center gap-2">
+                                                    <span className="bg-black/60 backdrop-blur text-white text-[10px] font-bold px-3 py-1.5 rounded-full uppercase tracking-widest border border-white/20">
+                                                        {course.format}
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            {/* Details Area */}
+                                            <div className="p-6 md:p-7 flex flex-col flex-1 bg-white dark:bg-gray-800 transition-colors duration-300">
+                                                <div className="flex-1">
+                                                    <div className="text-[10px] font-black text-[#65a30d] dark:text-[#a3e635] mb-2 uppercase tracking-widest transition-colors">{course.subject}</div>
+                                                    <h3 className="font-black text-xl text-[#022c22] dark:text-white mb-2 leading-tight group-hover:text-brand-lime transition-colors">
+                                                        {course.title}
+                                                    </h3>
+                                                    <div
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            // For now, mentor navigation might need more data from API
+                                                            if (onNavigate) onNavigate('mentorProfile', course.mentor_id || null);
+                                                        }}
+                                                        className="flex items-center gap-2 mb-4 cursor-pointer group/mentor hover:bg-gray-50 dark:hover:bg-gray-700/50 p-1.5 -ml-1.5 rounded-lg transition-colors inline-flex"
+                                                    >
+                                                        <div className="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 flex shrink-0 border border-gray-300 dark:border-gray-600 overflow-hidden group-hover/mentor:border-brand-lime transition-colors">
+                                                            {course.mentorImage ? <img src={course.mentorImage} alt="mentor" className="w-full h-full object-cover group-hover/mentor:scale-110 transition-transform" /> : null}
+                                                        </div>
+                                                        <p className="text-gray-600 dark:text-gray-400 text-sm font-medium transition-colors group-hover/mentor:text-brand-lime dark:group-hover/mentor:text-brand-lime">
+                                                            {course.mentor}
+                                                        </p>
+                                                    </div>
+
+                                                    <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-gray-600 dark:text-gray-300 mb-6 transition-colors">
+                                                        <span className="flex items-center gap-1.5 bg-gray-100 dark:bg-gray-900 px-3 py-1.5 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                                                            <Clock size={12} className="text-brand-lime" /> {course.duration}
+                                                        </span>
+                                                        <span className="flex items-center gap-1.5 bg-[#fefce8] dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-500 px-3 py-1.5 rounded-lg border border-yellow-200 dark:border-yellow-700/50 shadow-sm">
+                                                            <Star size={12} className="fill-current" /> {course.rating} ({course.reviews})
+                                                        </span>
+                                                        {course.status && (
+                                                            <span className={`px-2 py-1 rounded-md text-[10px] uppercase font-black ${
+                                                                course.status === 'upcoming' ? 'bg-blue-100 text-blue-700' :
+                                                                course.status === 'ongoing' ? 'bg-orange-100 text-orange-700' :
+                                                                'bg-green-100 text-green-700'
+                                                            }`}>
+                                                                {course.status}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </div>
+
+                                                {/* Action Footer */}
+                                                <div className="flex items-end justify-between border-t border-gray-100 dark:border-gray-700 pt-5 mt-auto transition-colors duration-300">
+                                                    <div>
+                                                        <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Lifetime Access</div>
+                                                        <div className="font-black text-2xl text-[#022c22] dark:text-white leading-none transition-colors">{course.price}</div>
+                                                    </div>
+                                                    <a
+                                                        href={course.link || "#"}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="bg-[#022c22] dark:bg-white text-white dark:text-[#022c22] text-sm font-black px-6 py-3 rounded-xl hover:bg-brand-lime hover:text-[#022c22] transition-colors shadow-lg active:scale-95 flex items-center gap-2"
+                                                    >
+                                                        ENROLL <ChevronRight size={16} />
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    ))
+                                )}
+
+                                {!loading && !error && filteredCourses.length === 0 && (
                                     <motion.div
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
@@ -563,12 +599,12 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                         </motion.div>
 
                         {/* Pagination UI */}
-                        {totalPages > 1 && (
+                        {pagination.total_pages > 1 && (
                             <div className="flex justify-center items-center gap-2 mt-12 mb-8">
                                 <button
                                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                                    disabled={currentPage === 1}
-                                    className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${currentPage === 1
+                                    disabled={currentPage === 1 || loading}
+                                    className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${currentPage === 1 || loading
                                         ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600'
                                         : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700 shadow-sm'
                                         }`}
@@ -577,14 +613,15 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                                 </button>
 
                                 <div className="flex items-center gap-1 mx-2">
-                                    {[...Array(totalPages)].map((_, i) => (
+                                    {[...Array(pagination.total_pages)].map((_, i) => (
                                         <button
                                             key={i}
                                             onClick={() => setCurrentPage(i + 1)}
+                                            disabled={loading}
                                             className={`w-10 h-10 flex items-center justify-center rounded-xl text-sm font-bold transition-all ${currentPage === i + 1
                                                 ? 'bg-[#bef264] text-[#022c22] shadow-md'
-                                                : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700 dark:hover:bg-gray-700'
-                                                }`}
+                                                : 'bg-white text-gray-600 hover:bg-gray-50 border border-100 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700 dark:hover:bg-gray-700'
+                                                } ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         >
                                             {i + 1}
                                         </button>
@@ -592,9 +629,9 @@ const CoursesPage = ({ initialSubject, onCompareNow, onBack, onNavigate }) => {
                                 </div>
 
                                 <button
-                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                                    disabled={currentPage === totalPages}
-                                    className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${currentPage === totalPages
+                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, pagination.total_pages))}
+                                    disabled={currentPage === pagination.total_pages || loading}
+                                    className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${currentPage === pagination.total_pages || loading
                                         ? 'bg-gray-100 text-gray-400 cursor-not-allowed dark:bg-gray-800 dark:text-gray-600'
                                         : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700 dark:hover:bg-gray-700 shadow-sm'
                                         }`}
